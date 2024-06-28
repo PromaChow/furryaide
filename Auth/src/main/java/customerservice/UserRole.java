@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "UserRole", namespace = "http://www.wstutorial.com/ws/CustomerService")
+@XmlType(name = "UserRole", namespace = "http://www.furryaide.com/authentication")
 @XmlEnum
 public enum UserRole {
 

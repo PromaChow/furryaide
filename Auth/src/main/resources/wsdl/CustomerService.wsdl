@@ -5,91 +5,21 @@
 				  xmlns:sts="http://www.wstutorial.com/ws/StatusCodeService"
 				  xmlns:auth="http://www.wstutorial.com/ws/CustomerService"
 				  xmlns:tns="http://www.wstutorial.com/ws/CustomerService"
+				  xmlns:roles="http://www.furryaide.com/authentication"
 				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 				  targetNamespace="http://www.wstutorial.com/ws/CustomerService">
 
 	<wsdl:types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.wstutorial.com/ws/CustomerService" schemaLocation="../schemas/customer.xsd"/>
-			<xsd:import namespace="http://www.wstutorial.com/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>
+<!--			<xsd:import namespace="http://www.wstutorial.com/ws/CustomerService" schemaLocation="../schemas/customer.xsd"/>-->
+<!--			<xsd:import namespace="http://www.wstutorial.com/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>-->
 			<xsd:import namespace="http://www.wstutorial.com/ws/CustomerService" schemaLocation="../schemas/auth.xsd"/>
 		</xsd:schema>
 
-		<xsd:schema targetNamespace="http://www.wstutorial.com/ws/CustomerService">
-			<xsd:element name="updateCustomerRequest">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="Customer" type="cus:Customer" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
 
-			<xsd:element name="updateCustomerResponse">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="statusCode" type="sts:statusCode" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-
-			<xsd:element name="deleteCustomerRequest">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="id" type="xsd:long" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-
-			<xsd:element name="deleteCustomerResponse">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="statusCode" type="sts:statusCode" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-
-			<xsd:element name="getCustomersRequest">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="id" type="xsd:long" />
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-
-			<xsd:element name="getCustomersResponse">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="customers" type="cus:Customer" minOccurs="0" maxOccurs="unbounded"/>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-		</xsd:schema>
 	</wsdl:types>
 
-	<wsdl:message name="customerFault">
-		<wsdl:part name="params" element="tns:customerFault" />
-	</wsdl:message>
 
-	<wsdl:message name="getCustomersRequestMsg">
-		<wsdl:part name="params" element="tns:getCustomersRequest" />
-	</wsdl:message>
-	<wsdl:message name="getCustomersResponseMsg">
-		<wsdl:part name="params" element="tns:getCustomersResponse" />
-	</wsdl:message>
-
-	<wsdl:message name="deleteCustomerRequestMsg">
-		<wsdl:part name="params" element="tns:deleteCustomerRequest" />
-	</wsdl:message>
-	<wsdl:message name="deleteCustomerResponseMsg">
-		<wsdl:part name="params" element="tns:deleteCustomerResponse" />
-	</wsdl:message>
-
-	<wsdl:message name="updateCustomerRequestMsg">
-		<wsdl:part name="params" element="tns:updateCustomerRequest" />
-	</wsdl:message>
-	<wsdl:message name="updateCustomerResponseMsg">
-		<wsdl:part name="params" element="tns:updateCustomerResponse" />
-	</wsdl:message>
 
 	<wsdl:message name="loginRequestMessage">
 		<wsdl:part name="parameters" element="auth:loginRequest"/>
@@ -99,22 +29,6 @@
 	</wsdl:message>
 
 	<wsdl:portType name="CustomerServicePortType">
-		<wsdl:operation name="deleteCustomer">
-			<wsdl:input message="tns:deleteCustomerRequestMsg" />
-			<wsdl:output message="tns:deleteCustomerResponseMsg" />
-			<wsdl:fault name="fault" message="tns:customerFault" />
-		</wsdl:operation>
-		<wsdl:operation name="updateCustomer">
-			<wsdl:input message="tns:updateCustomerRequestMsg" />
-			<wsdl:output message="tns:updateCustomerResponseMsg" />
-			<wsdl:fault name="fault" message="tns:customerFault" />
-		</wsdl:operation>
-		<wsdl:operation name="getCustomers">
-			<wsdl:input message="tns:getCustomersRequestMsg" />
-			<wsdl:output message="tns:getCustomersResponseMsg" />
-			<wsdl:fault name="fault" message="tns:customerFault" />
-		</wsdl:operation>
-
 		<wsdl:operation name="login">
 			<wsdl:input message="tns:loginRequestMessage"/>
 			<wsdl:output message="tns:loginResponseMessage"/>
@@ -131,43 +45,6 @@
 			<wsdl:output>
 				<soap:body use="literal"/>
 			</wsdl:output>
-		</wsdl:operation>
-
-		<wsdl:operation name="deleteCustomer">
-			<soap:operation soapAction="deleteCustomer" />
-			<wsdl:input>
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal" />
-			</wsdl:output>
-			<wsdl:fault name="fault">
-				<soap:fault name="fault" use="literal" />
-			</wsdl:fault>
-		</wsdl:operation>
-		<wsdl:operation name="updateCustomer">
-			<soap:operation soapAction="updateCustomer" />
-			<wsdl:input>
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal" />
-			</wsdl:output>
-			<wsdl:fault name="fault">
-				<soap:fault name="fault" use="literal" />
-			</wsdl:fault>
-		</wsdl:operation>
-		<wsdl:operation name="getCustomers">
-			<soap:operation soapAction="getCustomers" />
-			<wsdl:input>
-				<soap:body use="literal" />
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal" />
-			</wsdl:output>
-			<wsdl:fault name="fault">
-				<soap:fault name="fault" use="literal" />
-			</wsdl:fault>
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="CustomerService">

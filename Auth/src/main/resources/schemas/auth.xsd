@@ -2,17 +2,17 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://www.wstutorial.com/ws/CustomerService"
            xmlns="http://www.wstutorial.com/ws/CustomerService"
-
+           xmlns:roles="http://www.furryaide.com/authentication"
            elementFormDefault="qualified">
 
-
-    <xs:simpleType name="UserRole">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="CUSTOMER"/>
-            <xs:enumeration value="PET_RELINQUISHER"/>
-            <xs:enumeration value="SELLER"/>
-        </xs:restriction>
-    </xs:simpleType>
+    <xs:import namespace="http://www.furryaide.com/authentication" schemaLocation="user-roles.xsd"/>
+<!--    <xs:simpleType name="UserRole">-->
+<!--        <xs:restriction base="xs:string">-->
+<!--            <xs:enumeration value="CUSTOMER"/>-->
+<!--            <xs:enumeration value="PET_RELINQUISHER"/>-->
+<!--            <xs:enumeration value="SELLER"/>-->
+<!--        </xs:restriction>-->
+<!--    </xs:simpleType>-->
 
     <xs:element name="loginRequest">
         <xs:complexType>
@@ -45,7 +45,7 @@
             <xs:sequence>
                 <xs:element name="isValid" type="xs:boolean"/>
                 <xs:element name="userId" type="xs:string" minOccurs="0"/>
-                <xs:element name="role" type="UserRole" minOccurs="0"/>
+                <xs:element name="role" type="roles:UserRole" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

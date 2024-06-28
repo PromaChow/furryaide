@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="isValid" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="userId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="role" type="{http://www.wstutorial.com/ws/CustomerService}UserRole" minOccurs="0"/>
+ *         &lt;element name="role" type="{http://www.furryaide.com/authentication}UserRole" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
