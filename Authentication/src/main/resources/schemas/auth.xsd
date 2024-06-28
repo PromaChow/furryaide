@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.example.com/authentication"
+           xmlns="http://www.example.com/authentication"
+           xmlns:roles = "http://www.example.com/authentication"
+           elementFormDefault="qualified">
+
+<!--    <xs:import namespace="http://www.example.com/user" schemaLocation="user.xsd"/>-->
+<!--    <xs:import namespace="http://www.example.com/authentication" schemaLocation="user-roles.xsd"/>-->
+
+    <xs:simpleType name="UserRole">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CUSTOMER"/>
+            <xs:enumeration value="PET_RELINQUISHER"/>
+            <xs:enumeration value="SELLER"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="loginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="loginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="expiresIn" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="validateTokenRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="validateTokenResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="isValid" type="xs:boolean"/>
+                <xs:element name="userId" type="xs:string" minOccurs="0"/>
+                <xs:element name="role" type="UserRole" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
