@@ -34,6 +34,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ValidateTokenRequest }
+     * 
+     */
+    public ValidateTokenRequest createValidateTokenRequest() {
+        return new ValidateTokenRequest();
+    }
+
+    /**
+     * Create an instance of {@link ValidateTokenResponse }
+     * 
+     */
+    public ValidateTokenResponse createValidateTokenResponse() {
+        return new ValidateTokenResponse();
+    }
+
+    /**
      * Create an instance of {@link GetCustomersRequest }
      * 
      */
@@ -55,6 +71,22 @@ public class ObjectFactory {
      */
     public Customer createCustomer() {
         return new Customer();
+    }
+
+    /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link LoginRequest }
+     * 
+     */
+    public LoginRequest createLoginRequest() {
+        return new LoginRequest();
     }
 
     /**

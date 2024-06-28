@@ -4,20 +4,11 @@ package com.wstutorial.ws;
 import java.util.ArrayList;
 import java.util.List;
 
+import customerservice.*;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-
-import customerservice.DeleteCustomerRequest;
-import customerservice.DeleteCustomerResponse;
-import customerservice.GetCustomersRequest;
-import customerservice.GetCustomersResponse;
-import customerservice.ObjectFactory;
-import customerservice.StatusCode;
-import customerservice.Customer;
-import customerservice.UpdateCustomerRequest;
-import customerservice.UpdateCustomerResponse;
 
 @Endpoint
 public class CustomerServiceEndpoint {
@@ -34,7 +25,24 @@ public class CustomerServiceEndpoint {
 		response.setStatusCode(code);
 		return response;
 	}
-	
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "loginRequest")
+	@ResponsePayload
+	public LoginResponse login(@RequestPayload LoginRequest request) throws Exception {
+		if ("proma_1234".equals(request.getUsername()) && "1234".equals(request.getPassword())) {
+			String token = "fsjfnjsnskjfnsf";
+
+			ObjectFactory factory = new ObjectFactory();
+			LoginResponse response = factory.createLoginResponse();
+			response.setToken(token);
+			response.setExpiresIn((int) (390000 / 1000)); // Convert ms to seconds
+			return response;
+		} else {
+			throw new Exception("Invalid credentials");
+		}
+	}
+
+
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "deleteCustomerRequest" )
 	@ResponsePayload
 	public DeleteCustomerResponse deleteCustomer(@RequestPayload DeleteCustomerRequest request)throws Exception  {
