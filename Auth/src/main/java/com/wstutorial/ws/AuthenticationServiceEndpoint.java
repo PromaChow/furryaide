@@ -9,30 +9,44 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import repository.Database;
+import utils.User;
 import utils.UserRole;
 
 @Endpoint
 public class AuthenticationServiceEndpoint {
 	private static final String NAMESPACE_URI = "http://www.furryaide.com/authentication";
 
-	private Map<String, String> tokens = new HashMap<String, String>();
+
+
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "loginRequest")
 	@ResponsePayload
 	public LoginResponse login(@RequestPayload LoginRequest request) throws Exception {
-		if ("proma_1234".equals(request.getUsername()) && "1234".equals(request.getPassword())) {
-			String token = "fsjfnjsnskjfnsf";
 
+		Map users = Database.getInstance().getUsers();
+
+
+		if(users.containsKey(request.getUsername())){
+			User user = (User) users.get(request.getUsername());
+			System.out.println(user);
 			ObjectFactory factory = new ObjectFactory();
 			LoginResponse response = factory.createLoginResponse();
-			response.setToken(token);
+			response.setToken(user.getRole()+"1234");
 			response.setExpiresIn((int) (390000 / 1000));
-			response.setRole(UserRole.CUSTOMER);
+			response.setRole(user.getRole());
 			// Convert ms to seconds
 			return response;
 		} else {
-			throw new Exception("Invalid credentials");
+			ObjectFactory factory = new ObjectFactory();
+			LoginResponse response = factory.createLoginResponse();
+			response.setToken(null);
+			
+			response.setRole(null);
+			return response;
 		}
+
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "validateTokenRequest")
@@ -41,24 +55,21 @@ public class AuthenticationServiceEndpoint {
 		ObjectFactory factory = new ObjectFactory();
 		ValidateTokenResponse response = factory.createValidateTokenResponse();
 		try {
-			String username = validate(request.getToken());
+			User user = validate(request.getToken());
 			response.setIsValid(true);
-			response.setUserId(username); // Return user ID or username
+			response.setUserId(user.getUsername());
+			response.setRole(user.getRole());// Return user ID or username
 		} catch (Exception e) {
 			response.setIsValid(false);
 		}
 		return response;
 	}
 
-	private String generate(String username) {
-		String token = "help";
-		tokens.put(token, username);
-		return token;
-	}
 
-	private String validate(String token) throws Exception {
+	private User validate(String token) throws Exception {
+		Map tokens = Database.getInstance().getTokens();
 		if (tokens.containsKey(token)) {
-			return tokens.get(token);
+			return (User) tokens.get(token);
 		} else {
 			throw new Exception("Invalid token");
 		}
