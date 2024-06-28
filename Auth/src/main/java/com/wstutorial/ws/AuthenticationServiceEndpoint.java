@@ -9,6 +9,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.util.HashMap;
 import java.util.Map;
+import utils.UserRole;
 
 @Endpoint
 public class AuthenticationServiceEndpoint {
@@ -25,7 +26,9 @@ public class AuthenticationServiceEndpoint {
 			ObjectFactory factory = new ObjectFactory();
 			LoginResponse response = factory.createLoginResponse();
 			response.setToken(token);
-			response.setExpiresIn((int) (390000 / 1000)); // Convert ms to seconds
+			response.setExpiresIn((int) (390000 / 1000));
+			response.setRole(UserRole.CUSTOMER);
+			// Convert ms to seconds
 			return response;
 		} else {
 			throw new Exception("Invalid credentials");

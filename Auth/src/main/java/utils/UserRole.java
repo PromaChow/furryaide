@@ -1,5 +1,5 @@
 
-package authenticationservice;
+package utils;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  * 
  */
-@XmlType(name = "UserRole", namespace = "http://www.furryaide.com/authentication")
+@XmlType(name = "UserRole", namespace = "http://www.furryaide.com/authentication/roles")
 @XmlEnum
 public enum UserRole {
 

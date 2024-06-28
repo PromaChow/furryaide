@@ -2,10 +2,10 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://www.furryaide.com/authentication"
            xmlns="http://www.furryaide.com/authentication"
-           xmlns:roles="http://www.furryaide.com/authentication"
+           xmlns:roles="http://www.furryaide.com/authentication/roles"
            elementFormDefault="qualified">
 
-    <xs:import namespace="http://www.furryaide.com/authentication" schemaLocation="user-roles.xsd"/>
+    <xs:import namespace="http://www.furryaide.com/authentication/roles" schemaLocation="user-roles.xsd"/>
 <!--    <xs:simpleType name="UserRole">-->
 <!--        <xs:restriction base="xs:string">-->
 <!--            <xs:enumeration value="CUSTOMER"/>-->
@@ -28,6 +28,7 @@
             <xs:sequence>
                 <xs:element name="token" type="xs:string"/>
                 <xs:element name="expiresIn" type="xs:int"/>
+                <xs:element name="role" type="roles:UserRole"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
