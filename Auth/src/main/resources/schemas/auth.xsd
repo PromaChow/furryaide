@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://www.wstutorial.com/ws/CustomerService"
-           xmlns="http://www.wstutorial.com/ws/CustomerService"
+           targetNamespace="http://www.furryaide.com/authentication"
+           xmlns="http://www.furryaide.com/authentication"
            xmlns:roles="http://www.furryaide.com/authentication"
            elementFormDefault="qualified">
 

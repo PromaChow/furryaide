@@ -1,5 +1,5 @@
 
-package customerservice;
+package authenticationservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -33,12 +33,12 @@ import javax.xml.bind.annotation.XmlType;
     "username",
     "password"
 })
-@XmlRootElement(name = "loginRequest", namespace = "http://www.wstutorial.com/ws/CustomerService")
+@XmlRootElement(name = "loginRequest", namespace = "http://www.furryaide.com/authentication")
 public class LoginRequest {
 
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService", required = true)
+    @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
     protected String username;
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService", required = true)
+    @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
     protected String password;
 
     /**

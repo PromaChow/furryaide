@@ -1,5 +1,5 @@
 
-package customerservice;
+package authenticationservice;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;

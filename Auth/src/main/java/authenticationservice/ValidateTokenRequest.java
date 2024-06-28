@@ -1,5 +1,5 @@
 
-package customerservice;
+package authenticationservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="expiresIn" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,16 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "token",
-    "expiresIn"
+    "token"
 })
-@XmlRootElement(name = "loginResponse", namespace = "http://www.wstutorial.com/ws/CustomerService")
-public class LoginResponse {
+@XmlRootElement(name = "validateTokenRequest", namespace = "http://www.furryaide.com/authentication")
+public class ValidateTokenRequest {
 
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService", required = true)
+    @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
     protected String token;
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService")
-    protected int expiresIn;
 
     /**
      * Gets the value of the token property.
@@ -63,22 +59,6 @@ public class LoginResponse {
      */
     public void setToken(String value) {
         this.token = value;
-    }
-
-    /**
-     * Gets the value of the expiresIn property.
-     * 
-     */
-    public int getExpiresIn() {
-        return expiresIn;
-    }
-
-    /**
-     * Sets the value of the expiresIn property.
-     * 
-     */
-    public void setExpiresIn(int value) {
-        this.expiresIn = value;
     }
 
 }

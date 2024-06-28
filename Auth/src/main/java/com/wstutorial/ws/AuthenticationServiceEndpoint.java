@@ -1,18 +1,15 @@
 
 package com.wstutorial.ws;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import customerservice.*;
+import authenticationservice.*;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
-public class CustomerServiceEndpoint {
-	private static final String NAMESPACE_URI = "http://www.wstutorial.com/ws/CustomerService";
+public class AuthenticationServiceEndpoint {
+	private static final String NAMESPACE_URI = "http://www.furryaide.com/authentication";
 
 	
 

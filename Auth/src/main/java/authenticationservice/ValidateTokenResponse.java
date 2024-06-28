@@ -1,5 +1,5 @@
 
-package customerservice;
+package authenticationservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -36,14 +36,14 @@ import javax.xml.bind.annotation.XmlType;
     "userId",
     "role"
 })
-@XmlRootElement(name = "validateTokenResponse", namespace = "http://www.wstutorial.com/ws/CustomerService")
+@XmlRootElement(name = "validateTokenResponse", namespace = "http://www.furryaide.com/authentication")
 public class ValidateTokenResponse {
 
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService")
+    @XmlElement(namespace = "http://www.furryaide.com/authentication")
     protected boolean isValid;
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService")
+    @XmlElement(namespace = "http://www.furryaide.com/authentication")
     protected String userId;
-    @XmlElement(namespace = "http://www.wstutorial.com/ws/CustomerService")
+    @XmlElement(namespace = "http://www.furryaide.com/authentication")
     @XmlSchemaType(name = "string")
     protected UserRole role;
 
