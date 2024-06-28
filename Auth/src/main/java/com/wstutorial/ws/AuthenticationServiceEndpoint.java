@@ -7,11 +7,14 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Endpoint
 public class AuthenticationServiceEndpoint {
 	private static final String NAMESPACE_URI = "http://www.furryaide.com/authentication";
 
-	
+	private Map<String, String> tokens = new HashMap<String, String>();
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "loginRequest")
 	@ResponsePayload
@@ -29,6 +32,35 @@ public class AuthenticationServiceEndpoint {
 		}
 	}
 
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "validateTokenRequest")
+	@ResponsePayload
+	public ValidateTokenResponse validateToken(@RequestPayload ValidateTokenRequest request) {
+		ObjectFactory factory = new ObjectFactory();
+		ValidateTokenResponse response = factory.createValidateTokenResponse();
+		try {
+			String username = validate(request.getToken());
+			response.setIsValid(true);
+			response.setUserId(username); // Return user ID or username
+		} catch (Exception e) {
+			response.setIsValid(false);
+		}
+		return response;
+	}
 
+	private String generate(String username) {
+		String token = "help";
+		tokens.put(token, username);
+		return token;
+	}
 
+	private String validate(String token) throws Exception {
+		if (tokens.containsKey(token)) {
+			return tokens.get(token);
+		} else {
+			throw new Exception("Invalid token");
+		}
+	}
 }
+
+
+

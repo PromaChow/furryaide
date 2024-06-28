@@ -24,18 +24,40 @@
 	<wsdl:message name="loginResponseMessage">
 		<wsdl:part name="parameters" element="auth:loginResponse"/>
 	</wsdl:message>
+	<wsdl:message name="validateTokenRequestMessage">
+		<wsdl:part name="parameters" element="auth:validateTokenRequest"/>
+	</wsdl:message>
+	<wsdl:message name="validateTokenResponseMessage">
+		<wsdl:part name="parameters" element="auth:validateTokenResponse"/>
+	</wsdl:message>
 
 	<wsdl:portType name="AuthenticationServicePortType">
 		<wsdl:operation name="login">
 			<wsdl:input message="tns:loginRequestMessage"/>
 			<wsdl:output message="tns:loginResponseMessage"/>
 		</wsdl:operation>
+
+		<wsdl:operation name="validateToken">
+			<wsdl:input message="tns:validateTokenRequestMessage"/>
+			<wsdl:output message="tns:validateTokenResponseMessage"/>
+		</wsdl:operation>
+
 	</wsdl:portType>
 
 	<wsdl:binding name="authenticationServiceSOAPBinding" type="tns:AuthenticationServicePortType">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<wsdl:operation name="login">
 			<soap:operation soapAction="login"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="validateToken">
+			<soap:operation soapAction="validateToken"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
