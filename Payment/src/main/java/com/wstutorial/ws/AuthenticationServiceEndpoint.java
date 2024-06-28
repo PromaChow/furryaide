@@ -42,7 +42,7 @@ public class AuthenticationServiceEndpoint {
 			ObjectFactory factory = new ObjectFactory();
 			LoginResponse response = factory.createLoginResponse();
 			response.setToken(null);
-
+			
 			response.setRole(null);
 			return response;
 		}
