@@ -1,5 +1,5 @@
 
-package authenticationservice;
+package paymentservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="transactionId" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "token"
+    "transactionId"
 })
-@XmlRootElement(name = "validateTokenRequest", namespace = "http://www.furryaide.com/authentication")
-public class ValidateTokenRequest {
+@XmlRootElement(name = "validatePaymentRequest", namespace = "http://www.furryaide.com/payment")
+public class ValidatePaymentRequest {
 
-    @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
-    protected String token;
+    @XmlElement(namespace = "http://www.furryaide.com/payment", required = true)
+    protected String transactionId;
 
     /**
-     * Gets the value of the token property.
+     * Gets the value of the transactionId property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getToken() {
-        return token;
+    public String getTransactionId() {
+        return transactionId;
     }
 
     /**
-     * Sets the value of the token property.
+     * Sets the value of the transactionId property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setToken(String value) {
-        this.token = value;
+    public void setTransactionId(String value) {
+        this.transactionId = value;
     }
 
 }
