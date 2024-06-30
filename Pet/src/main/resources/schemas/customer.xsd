@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.wstutorial.com/ws/CustomerService"
+           targetNamespace="http://www.wstutorial.com/ws/CustomerService"
+           elementFormDefault="qualified">
+
+    <xs:complexType name="Customer">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="email" type="xs:string" />
+            <xs:element name="phone" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Customers">
+        <xs:sequence>
+            <xs:element type="tns:Customer" minOccurs="0" maxOccurs="unbounded" name="customers" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="customerFault" type="xs:string" />
+</xs:schema>

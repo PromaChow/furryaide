@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:qns="http://www.furryaide/ws/Question"
+				  xmlns:tns="http://www.furryaide/ws/QuestionnaireService"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  xmlns:operations="http://www.furryaide/ws/QuestionnaireService"
+				  xmlns:sts="http://www.furryaide/ws/StatusCodeService"
+				  targetNamespace="http://www.furryaide/ws/QuestionnaireService">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide/ws/Question" schemaLocation="../schemas/question.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/QuestionnaireService" schemaLocation="../schemas/question-operations.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="questionnaireFault">
+		<wsdl:part name="params" element="qns:questionnaireFault" />
+	</wsdl:message>
+
+	<wsdl:message name="createQuestionRequestMsg">
+		<wsdl:part name="params" element="operations:createQuestionRequest" />
+	</wsdl:message>
+	<wsdl:message name="createQuestionResponseMsg">
+		<wsdl:part name="params" element="operations:createQuestionResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="deleteQuestionRequestMsg">
+		<wsdl:part name="params" element="operations:deleteQuestionRequest" />
+	</wsdl:message>
+	<wsdl:message name="deleteQuestionResponseMsg">
+		<wsdl:part name="params" element="operations:deleteQuestionResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="updateQuestionRequestMsg">
+		<wsdl:part name="params" element="operations:updateQuestionRequest" />
+	</wsdl:message>
+	<wsdl:message name="updateQuestionResponseMsg">
+		<wsdl:part name="params" element="operations:updateQuestionResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getQuestionRequestMsg">
+		<wsdl:part name="params" element="operations:getQuestionRequest" />
+	</wsdl:message>
+	<wsdl:message name="getQuestionResponseMsg">
+		<wsdl:part name="params" element="operations:getQuestionResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="listQuestionsRequestMsg">
+		<wsdl:part name="params" element="operations:listQuestionsRequest" />
+	</wsdl:message>
+	<wsdl:message name="listQuestionsResponseMsg">
+		<wsdl:part name="params" element="operations:listQuestionsResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="QuestionnaireServicePortType">
+		<wsdl:operation name="createQuestion">
+			<wsdl:input message="tns:createQuestionRequestMsg" />
+			<wsdl:output message="tns:createQuestionResponseMsg" />
+			<wsdl:fault name="fault" message="tns:questionnaireFault" />
+		</wsdl:operation>
+		<wsdl:operation name="deleteQuestion">
+			<wsdl:input message="tns:deleteQuestionRequestMsg" />
+			<wsdl:output message="tns:deleteQuestionResponseMsg" />
+			<wsdl:fault name="fault" message="tns:questionnaireFault" />
+		</wsdl:operation>
+		<wsdl:operation name="updateQuestion">
+			<wsdl:input message="tns:updateQuestionRequestMsg" />
+			<wsdl:output message="tns:updateQuestionResponseMsg" />
+			<wsdl:fault name="fault" message="tns:questionnaireFault" />
+		</wsdl:operation>
+		<wsdl:operation name="getQuestion">
+			<wsdl:input message="tns:getQuestionRequestMsg" />
+			<wsdl:output message="tns:getQuestionResponseMsg" />
+			<wsdl:fault name="fault" message="tns:questionnaireFault" />
+		</wsdl:operation>
+		<wsdl:operation name="listQuestions">
+			<wsdl:input message="tns:listQuestionsRequestMsg" />
+			<wsdl:output message="tns:listQuestionsResponseMsg" />
+			<wsdl:fault name="fault" message="tns:questionnaireFault" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="questionnaireServiceSOAPBinding" type="tns:QuestionnaireServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="createQuestion">
+			<soap:operation soapAction="createQuestion" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="deleteQuestion">
+			<soap:operation soapAction="deleteQuestion" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updateQuestion">
+			<soap:operation soapAction="updateQuestion" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getQuestion">
+			<soap:operation soapAction="getQuestion" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="listQuestions">
+			<soap:operation soapAction="listQuestions" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="QuestionnaireService">
+		<wsdl:port name="QuestionnaireServicePort" binding="tns:questionnaireServiceSOAPBinding">
+			<soap:address location="http://localhost:8080/wsdlfirst/questionnaireService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

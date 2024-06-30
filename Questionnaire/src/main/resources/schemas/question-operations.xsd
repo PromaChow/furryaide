@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.furryaide/ws/QuestionnaireService"
+           xmlns:qns="http://www.furryaide/ws/Question"
+           targetNamespace="http://www.furryaide/ws/QuestionnaireService"
+           xmlns:status="http://www.furryaide/ws/StatusCodeService"
+           elementFormDefault="qualified">
+
+    <xs:element name="createQuestionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Question" type="qns:Question" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createQuestionResponse">
+        <xs:complexType>
+            <xs:sequence>
+            <xs:element name="statusCode" type="status:statusCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteQuestionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteQuestionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="statusCode" type="status:statusCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateQuestionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Question" type="qns:Question" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateQuestionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="statusCode" type="status:statusCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getQuestionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getQuestionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Question" type="qns:Question" minOccurs="0" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listQuestionsRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listQuestionsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Questions" type="qns:Question" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

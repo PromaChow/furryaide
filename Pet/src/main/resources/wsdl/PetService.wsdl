@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:pet="http://www.furryaide/ws/Pet"
+				  xmlns:sts="http://www.furryaide/ws/StatusCodeService"
+				  xmlns:operations="http://www.furryaide/ws/PetService"
+				  xmlns:tns="http://www.furryaide/ws/PetService"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  targetNamespace="http://www.furryaide/ws/PetService">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide/ws/Pet" schemaLocation="../schemas/pet.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/PetService" schemaLocation="../schemas/pet-operations.xsd"/>
+		</xsd:schema>
+
+
+	</wsdl:types>
+
+	<wsdl:message name="petFault">
+		<wsdl:part name="params" element="pet:petFault" />
+	</wsdl:message>
+
+	<wsdl:message name="createPetRequestMsg">
+		<wsdl:part name="params" element="operations:createPetRequest" />
+	</wsdl:message>
+	<wsdl:message name="createPetResponseMsg">
+		<wsdl:part name="params" element="operations:createPetResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="deletePetRequestMsg">
+		<wsdl:part name="params" element="operations:deletePetRequest" />
+	</wsdl:message>
+	<wsdl:message name="deletePetResponseMsg">
+		<wsdl:part name="params" element="operations:deletePetResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="updatePetRequestMsg">
+		<wsdl:part name="params" element="operations:updatePetRequest" />
+	</wsdl:message>
+	<wsdl:message name="updatePetResponseMsg">
+		<wsdl:part name="params" element="operations:updatePetResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="getPetRequestMsg">
+		<wsdl:part name="params" element="operations:getPetRequest" />
+	</wsdl:message>
+	<wsdl:message name="getPetResponseMsg">
+		<wsdl:part name="params" element="operations:getPetResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="searchPetsRequestMsg">
+		<wsdl:part name="params" element="operations:searchPetsRequest" />
+	</wsdl:message>
+	<wsdl:message name="searchPetsResponseMsg">
+		<wsdl:part name="params" element="operations:searchPetsResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="sortPetsRequestMsg">
+		<wsdl:part name="params" element="operations:sortPetsRequest" />
+	</wsdl:message>
+	<wsdl:message name="sortPetsResponseMsg">
+		<wsdl:part name="params" element="operations:sortPetsResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="filterPetsRequestMsg">
+		<wsdl:part name="params" element="operations:filterPetsRequest" />
+	</wsdl:message>
+	<wsdl:message name="filterPetsResponseMsg">
+		<wsdl:part name="params" element="operations:filterPetsResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="PetServicePortType">
+		<wsdl:operation name="createPet">
+			<wsdl:input message="tns:createPetRequestMsg" />
+			<wsdl:output message="tns:createPetResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+		<wsdl:operation name="deletePet">
+			<wsdl:input message="tns:deletePetRequestMsg" />
+			<wsdl:output message="tns:deletePetResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+		<wsdl:operation name="updatePet">
+			<wsdl:input message="tns:updatePetRequestMsg" />
+			<wsdl:output message="tns:updatePetResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+		<wsdl:operation name="getPet">
+			<wsdl:input message="tns:getPetRequestMsg" />
+			<wsdl:output message="tns:getPetResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+		<wsdl:operation name="searchPets">
+			<wsdl:input message="tns:searchPetsRequestMsg" />
+			<wsdl:output message="tns:searchPetsResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+		<wsdl:operation name="sortPets">
+			<wsdl:input message="tns:sortPetsRequestMsg" />
+			<wsdl:output message="tns:sortPetsResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+		<wsdl:operation name="filterPets">
+			<wsdl:input message="tns:filterPetsRequestMsg" />
+			<wsdl:output message="tns:filterPetsResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="petServiceSOAPBinding" type="tns:PetServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="createPet">
+			<soap:operation soapAction="createPet" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="deletePet">
+			<soap:operation soapAction="deletePet" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updatePet">
+			<soap:operation soapAction="updatePet" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getPet">
+			<soap:operation soapAction="getPet" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="searchPets">
+			<soap:operation soapAction="searchPets" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="sortPets">
+			<soap:operation soapAction="sortPets" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="filterPets">
+			<soap:operation soapAction="filterPets" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="PetService">
+		<wsdl:port name="PetServicePort" binding="tns:petServiceSOAPBinding">
+			<soap:address location="http://localhost:6000/wsdlfirst/petService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

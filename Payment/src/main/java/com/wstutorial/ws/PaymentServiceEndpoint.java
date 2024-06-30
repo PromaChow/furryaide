@@ -15,11 +15,6 @@ public class PaymentServiceEndpoint {
 	private static final String NAMESPACE_URI = "http://www.furryaide.com/payment";
 
 
-	public PaymentServiceEndpoint() {
-		// Initialize some dummy users
-
-	}
-
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "makePaymentRequest")
 	@ResponsePayload
 	public MakePaymentResponse makePayment(@RequestPayload MakePaymentRequest request) {

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://www.furryaide/ws/PetService"
+            xmlns:sts="http://www.furryaide/ws/StatusCodeService"
+            xmlns:pet="http://www.furryaide/ws/Pet"
+            targetNamespace="http://www.furryaide/ws/PetService"
+            elementFormDefault="qualified">
+        <xs:element name="createPetRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Pet" type="pet:Pet" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="createPetResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="statusCode" type="sts:statusCode" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="deletePetRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="deletePetResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="statusCode" type="sts:statusCode" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="updatePetRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Pet" type="pet:Pet" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="updatePetResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="statusCode" type="sts:statusCode" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="getPetRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="getPetResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Pet" type="pet:Pet" minOccurs="0" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="searchPetsRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="query" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="searchPetsResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Pets" type="pet:Pet" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="sortPetsRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="sortBy" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="sortPetsResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Pets" type="pet:Pet" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="filterPetsRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="filterBy" type="xs:string" />
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+
+        <xs:element name="filterPetsResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="Pets" type="pet:Pet" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+    </xs:schema>
+    
+    
+  
+
+
