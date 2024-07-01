@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://www.furryaide.com/accesscontrol"
+           xmlns:permission="http://www.furryaide.com/permission"
            xmlns="http://www.furryaide.com/accesscontrol"
            elementFormDefault="qualified">
-
+    <xs:import namespace="http://www.furryaide.com/permission" schemaLocation="../../../../../central-schemas/permission.xsd"/>
     <xs:element name="checkPermissionRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="token" type="xs:string"/>
-                <xs:element name="permission" type="xs:string"/>
+                <xs:element name="permission" type="permission:permission" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
