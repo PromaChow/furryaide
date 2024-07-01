@@ -25,20 +25,13 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _PetFault_QNAME = new QName("http://www.furryaide/ws/Pet", "petFault");
+    private final static QName _GetAllPetsRequest_QNAME = new QName("http://www.furryaide/ws/PetService", "getAllPetsRequest");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: petservice
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Pets }
-     * 
-     */
-    public Pets createPets() {
-        return new Pets();
     }
 
     /**
@@ -114,6 +107,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllPetsResponse }
+     * 
+     */
+    public GetAllPetsResponse createGetAllPetsResponse() {
+        return new GetAllPetsResponse();
+    }
+
+    /**
      * Create an instance of {@link SortPetsResponse }
      * 
      */
@@ -176,6 +177,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.furryaide/ws/Pet", name = "petFault")
     public JAXBElement<String> createPetFault(String value) {
         return new JAXBElement<String>(_PetFault_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.furryaide/ws/PetService", name = "getAllPetsRequest")
+    public JAXBElement<Object> createGetAllPetsRequest(Object value) {
+        return new JAXBElement<Object>(_GetAllPetsRequest_QNAME, Object.class, null, value);
     }
 
 }

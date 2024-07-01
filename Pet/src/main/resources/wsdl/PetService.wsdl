@@ -70,6 +70,12 @@
 	<wsdl:message name="filterPetsResponseMsg">
 		<wsdl:part name="params" element="operations:filterPetsResponse" />
 	</wsdl:message>
+	<wsdl:message name="getAllPetsRequestMsg">
+		<wsdl:part name="params" element="operations:getAllPetsRequest" />
+	</wsdl:message>
+	<wsdl:message name="getAllPetsResponseMsg">
+		<wsdl:part name="params" element="operations:getAllPetsResponse" />
+	</wsdl:message>
 
 	<wsdl:portType name="PetServicePortType">
 		<wsdl:operation name="createPet">
@@ -107,10 +113,27 @@
 			<wsdl:output message="tns:filterPetsResponseMsg" />
 			<wsdl:fault name="fault" message="tns:petFault" />
 		</wsdl:operation>
+		<wsdl:operation name="getAllPets">
+			<wsdl:input message="tns:getAllPetsRequestMsg" />
+			<wsdl:output message="tns:getAllPetsResponseMsg" />
+			<wsdl:fault name="fault" message="tns:petFault" />
+		</wsdl:operation>
 	</wsdl:portType>
 
 	<wsdl:binding name="petServiceSOAPBinding" type="tns:PetServicePortType">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getAllPets">
+			<soap:operation soapAction="getAllPets" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
 		<wsdl:operation name="createPet">
 			<soap:operation soapAction="createPet" />
 			<wsdl:input>
@@ -199,7 +222,7 @@
 
 	<wsdl:service name="PetService">
 		<wsdl:port name="PetServicePort" binding="tns:petServiceSOAPBinding">
-			<soap:address location="http://localhost:6000/wsdlfirst/petService" />
+			<soap:address location="http://localhost:5001/wsdlfirst/petService" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

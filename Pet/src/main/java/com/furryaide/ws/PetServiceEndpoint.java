@@ -1,41 +1,37 @@
 package com.furryaide.ws;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import petservice.*;
+import repository.PetRepository;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import petservice.CreatePetRequest;
-import petservice.CreatePetResponse;
-import petservice.DeletePetRequest;
-import petservice.DeletePetResponse;
-import petservice.GetPetRequest;
-import petservice.GetPetResponse;
-import petservice.SearchPetsRequest;
-import petservice.SearchPetsResponse;
-import petservice.SortPetsRequest;
-import petservice.SortPetsResponse;
-import petservice.FilterPetsRequest;
-import petservice.FilterPetsResponse;
-import petservice.UpdatePetRequest;
-import petservice.UpdatePetResponse;
-import petservice.Pet;
-import petservice.ObjectFactory;
-import petservice.StatusCode;
+import java.util.List;
 
 @Endpoint
 public class PetServiceEndpoint {
+
 	private static final String NAMESPACE_URI = "http://www.furryaide/ws/PetService";
+	private PetRepository petRepository = new PetRepository();
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "createPetRequest")
 	@ResponsePayload
-	public CreatePetResponse createPet(@RequestPayload CreatePetRequest request) throws Exception {
+	public CreatePetResponse createPet(@RequestPayload CreatePetRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		StatusCode code = factory.createStatusCode();
 		CreatePetResponse response = factory.createCreatePetResponse();
+
+		Pet pet = new Pet();
+		pet.setId(request.getPet().getId());
+		pet.setName(request.getPet().getName());
+		pet.setSpecies(request.getPet().getSpecies());
+		pet.setBreed(request.getPet().getBreed());
+		pet.setAge(request.getPet().getAge());
+
+		petRepository.addPet(pet);
+
 		code.setCode(200);
 		response.setStatusCode(code);
 		return response;
@@ -43,21 +39,35 @@ public class PetServiceEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "updatePetRequest")
 	@ResponsePayload
-	public UpdatePetResponse updatePet(@RequestPayload UpdatePetRequest request) throws Exception {
+	public UpdatePetResponse updatePet(@RequestPayload UpdatePetRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		StatusCode code = factory.createStatusCode();
 		UpdatePetResponse response = factory.createUpdatePetResponse();
-		code.setCode(200);
+
+		Pet pet = petRepository.getPetById(request.getPet().getId());
+		if (pet != null) {
+			pet.setName(request.getPet().getName());
+			pet.setSpecies(request.getPet().getSpecies());
+			pet.setBreed(request.getPet().getBreed());
+			pet.setAge(request.getPet().getAge());
+			code.setCode(200);
+		} else {
+			code.setCode(404);
+		}
+
 		response.setStatusCode(code);
 		return response;
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "deletePetRequest")
 	@ResponsePayload
-	public DeletePetResponse deletePet(@RequestPayload DeletePetRequest request) throws Exception {
+	public DeletePetResponse deletePet(@RequestPayload DeletePetRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		DeletePetResponse response = factory.createDeletePetResponse();
 		StatusCode code = factory.createStatusCode();
+
+		petRepository.deletePet(request.getId());
+
 		code.setCode(204);
 		response.setStatusCode(code);
 		return response;
@@ -65,70 +75,53 @@ public class PetServiceEndpoint {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getPetRequest")
 	@ResponsePayload
-	public GetPetResponse getPet(@RequestPayload GetPetRequest request) throws Exception {
+	public GetPetResponse getPet(@RequestPayload GetPetRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		GetPetResponse response = factory.createGetPetResponse();
-		Pet pet = getPetById(request.getId());
+		Pet pet = petRepository.getPetById(request.getId());
 		response.setPet(pet);
 		return response;
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "searchPetsRequest")
 	@ResponsePayload
-	public SearchPetsResponse searchPets(@RequestPayload SearchPetsRequest request) throws Exception {
+	public SearchPetsResponse searchPets(@RequestPayload SearchPetsRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		SearchPetsResponse response = factory.createSearchPetsResponse();
-		List<Pet> pets = searchPetsByQuery(request.getQuery());
+		List<Pet> pets = petRepository.searchPets(request.getQuery());
 		response.getPets().addAll(pets);
 		return response;
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "sortPetsRequest")
 	@ResponsePayload
-	public SortPetsResponse sortPets(@RequestPayload SortPetsRequest request) throws Exception {
+	public SortPetsResponse sortPets(@RequestPayload SortPetsRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		SortPetsResponse response = factory.createSortPetsResponse();
-		List<Pet> pets = sortPetsBy(request.getSortBy());
+		List<Pet> pets = petRepository.sortPetsByAge();
 		response.getPets().addAll(pets);
 		return response;
 	}
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "filterPetsRequest")
 	@ResponsePayload
-	public FilterPetsResponse filterPets(@RequestPayload FilterPetsRequest request) throws Exception {
+	public FilterPetsResponse filterPets(@RequestPayload FilterPetsRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		FilterPetsResponse response = factory.createFilterPetsResponse();
-		List<Pet> pets = filterPetsBy(request.getFilterBy());
+		List<Pet> pets = petRepository.filterPetsBySpecies(request.getFilterBy());
 		response.getPets().addAll(pets);
 		return response;
 	}
 
-	private Pet getPetById(Long id) {
-		Pet pet = new Pet();
-		pet.setId(id);
-		pet.setName("Fido");
-		pet.setSpecies("Dog");
-		pet.setBreed("Labrador");
-		pet.setAge(5);
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllPetsRequest")
+	@ResponsePayload
+	public GetAllPetsResponse getAllPets() {
+		ObjectFactory factory = new ObjectFactory();
+		GetAllPetsResponse response = factory.createGetAllPetsResponse();
+		List<Pet> pets = petRepository.getAllPets();
+		System.out.println(pets);
+		response.getPets().addAll(pets);
 
-		return pet;
-	}
-
-	private List<Pet> searchPetsByQuery(String query) {
-		List<Pet> pets = new ArrayList<Pet>();
-		// Add logic to search pets based on the query
-		return pets;
-	}
-
-	private List<Pet> sortPetsBy(String sortBy) {
-		List<Pet> pets = new ArrayList<Pet>();
-		// Add logic to sort pets based on the sortBy criteria
-		return pets;
-	}
-
-	private List<Pet> filterPetsBy(String filterBy) {
-		List<Pet> pets = new ArrayList<Pet>();
-		// Add logic to filter pets based on the filterBy criteria
-		return pets;
+		return response;
 	}
 }
