@@ -25,7 +25,8 @@ public class JWTAuthClient {
                 "</soapenv:Envelope>";
 
         Document document = getParsedOutput(xmlInput, JWT_AUTH_SERVICE_URL);
-        return document.getElementsByTagName("token").item(0).getTextContent();
+
+        return document.getElementsByTagName("ns2:token").item(0).getTextContent();
     }
 
     public static boolean validateToken(String token) throws IOException, ParserConfigurationException, SAXException {

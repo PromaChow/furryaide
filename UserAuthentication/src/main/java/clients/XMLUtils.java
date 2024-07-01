@@ -1,14 +1,21 @@
 package clients;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 public class XMLUtils {
 
@@ -28,16 +35,44 @@ public class XMLUtils {
         request.write(buffer);
         request.close();
 
-        BufferedReader response = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
+        InputStreamReader isr = new InputStreamReader(httpConn.getInputStream(), Charset.forName("UTF-8"));
+        BufferedReader in = new BufferedReader(isr);
 
+        String responseString;
         StringBuilder outputString = new StringBuilder();
-        String line;
-        while ((line = response.readLine()) != null) {
-            outputString.append(line);
+        while ((responseString = in.readLine()) != null) {
+            outputString.append(responseString);
         }
-        response.close();
+        in.close();
 
-        InputSource inputSource = new InputSource(new StringReader(outputString.toString()));
-        return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputSource);
+        String formattedSOAPResponse = formatXML(outputString.toString());
+        System.out.println("Response: " + formattedSOAPResponse);
+
+        return parseXmlFile(outputString.toString());
+    }
+
+    private static String formatXML(String unformattedXml) {
+        try {
+            Document document = parseXmlFile(unformattedXml);
+            NodeList nodeList = document.getElementsByTagName("ns2:token");
+            return nodeList.item(0).getTextContent();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Document parseXmlFile(String in) throws IOException, ParserConfigurationException, SAXException {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        InputSource is = new InputSource(new StringReader(in));
+        return db.parse(is);
+    }
+
+    public static String getTokenFromResponse(Document document) {
+        NodeList tokenNodes = document.getElementsByTagName("token");
+        if (tokenNodes.getLength() > 0) {
+            return tokenNodes.item(0).getTextContent();
+        }
+        return null;
     }
 }

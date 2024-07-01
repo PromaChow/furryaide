@@ -17,10 +17,10 @@ public class AuthenticationServiceEndpoint {
 	public GenerateTokenResponse generateToken(@RequestPayload GenerateTokenRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		GenerateTokenResponse response = factory.createGenerateTokenResponse();
-
+		System.out.println(request.getUsername());
 		// Dummy token generation
 		String token = "dummy-token-for-" + request.getUsername();
-		response.setToken(token);
+
 		response.setExpiresIn(3600); // Token expiry time in seconds (1 hour)
 
 		return response;
