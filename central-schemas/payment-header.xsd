@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.furryaide.com/payment/header"
+           xmlns="http://www.furryaide.com/payment/header"
+           elementFormDefault="qualified">
+
+
+        <xs:complexType name="Header" >
+            <xs:sequence>
+                <xs:element name="paymentId" type="xs:string"/>
+                <xs:element name="amount" type="xs:decimal"/>
+                <xs:element name="payerId" type="xs:string"/>
+                <xs:element name="payeeId" type="xs:string"/>
+
+            </xs:sequence>
+        </xs:complexType>
+
+
+
+</xs:schema>

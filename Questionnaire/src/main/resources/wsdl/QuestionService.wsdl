@@ -149,7 +149,7 @@
 
 	<wsdl:service name="QuestionnaireService">
 		<wsdl:port name="QuestionnaireServicePort" binding="tns:questionnaireServiceSOAPBinding">
-			<soap:address location="http://localhost:8000/wsdlfirst/questionnaireService" />
+			<soap:address location="http://localhost:3005/wsdlfirst/questionnaireService" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
