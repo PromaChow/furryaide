@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:pet="http://www.furryaide/ws/Pet"
+				  xmlns:sts="http://www.furryaide/ws/StatusCodeService"
+				  xmlns:operations="http://www.furryaide/ws/PetsManagementService"
+				  xmlns:tns="http://www.furryaide/ws/PetsManagementService"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  targetNamespace="http://www.furryaide/ws/PetsManagementService">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide/ws/Pet" schemaLocation="../../../../../central-schemas/pet.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>
+			<xsd:import namespace="http://www.furryaide.com/permission" schemaLocation="../../../../../central-schemas/permission.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/PetsManagementService" schemaLocation="../schemas/pets-management-operations.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- Messages for getManagedPets -->
+	<wsdl:message name="getManagedPetsRequestMsg">
+		<wsdl:part name="parameters" element="operations:getManagedPetsRequest" />
+	</wsdl:message>
+	<wsdl:message name="getManagedPetsResponseMsg">
+		<wsdl:part name="parameters" element="operations:getManagedPetsResponse" />
+	</wsdl:message>
+
+	<!-- Messages for getManagedPetDetails -->
+	<wsdl:message name="getManagedPetDetailsRequestMsg">
+		<wsdl:part name="parameters" element="operations:getManagedPetDetailsRequest" />
+	</wsdl:message>
+	<wsdl:message name="getManagedPetDetailsResponseMsg">
+		<wsdl:part name="parameters" element="operations:getManagedPetDetailsResponse" />
+	</wsdl:message>
+
+	<wsdl:portType name="PetsManagementServicePortType">
+		<wsdl:operation name="getManagedPets">
+			<wsdl:input message="tns:getManagedPetsRequestMsg" />
+			<wsdl:output message="tns:getManagedPetsResponseMsg" />
+		</wsdl:operation>
+		<wsdl:operation name="getManagedPetDetails">
+			<wsdl:input message="tns:getManagedPetDetailsRequestMsg" />
+			<wsdl:output message="tns:getManagedPetDetailsResponseMsg" />
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="petsManagementServiceSOAPBinding" type="tns:PetsManagementServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getManagedPets">
+			<soap:operation soapAction="getManagedPets" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getManagedPetDetails">
+			<soap:operation soapAction="getManagedPetDetails" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="PetsManagementService">
+		<wsdl:port name="PetsManagementServicePort" binding="tns:petsManagementServiceSOAPBinding">
+			<soap:address location="http://localhost:3004/wsdlfirst/petsManagementService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

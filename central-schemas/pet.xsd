@@ -14,11 +14,5 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="Pets">
-        <xs:sequence>
-            <xs:element type="tns:Pet" minOccurs="0" maxOccurs="unbounded" name="pets" />
-        </xs:sequence>
-    </xs:complexType>
-
     <xs:element name="petFault" type="xs:string" />
 </xs:schema>
