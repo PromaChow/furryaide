@@ -1,13 +1,12 @@
 
-package authenticationservice;
+package jwtauthservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import utils.UserRole;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -21,7 +20,6 @@ import utils.UserRole;
  *       &lt;sequence>
  *         &lt;element name="isValid" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="userId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="role" type="{http://www.furryaide.com/authentication/roles}UserRole" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,8 +31,7 @@ import utils.UserRole;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "isValid",
-    "userId",
-    "role"
+    "userId"
 })
 @XmlRootElement(name = "validateTokenResponse", namespace = "http://www.furryaide.com/authentication")
 public class ValidateTokenResponse {
@@ -43,9 +40,6 @@ public class ValidateTokenResponse {
     protected boolean isValid;
     @XmlElement(namespace = "http://www.furryaide.com/authentication")
     protected String userId;
-    @XmlElement(namespace = "http://www.furryaide.com/authentication")
-    @XmlSchemaType(name = "string")
-    protected UserRole role;
 
     /**
      * Gets the value of the isValid property.
@@ -85,30 +79,6 @@ public class ValidateTokenResponse {
      */
     public void setUserId(String value) {
         this.userId = value;
-    }
-
-    /**
-     * Gets the value of the role property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UserRole }
-     *     
-     */
-    public UserRole getRole() {
-        return role;
-    }
-
-    /**
-     * Sets the value of the role property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UserRole }
-     *     
-     */
-    public void setRole(UserRole value) {
-        this.role = value;
     }
 
 }

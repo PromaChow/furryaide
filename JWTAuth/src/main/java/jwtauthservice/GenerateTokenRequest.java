@@ -1,11 +1,10 @@
 
-package utils;
+package jwtauthservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -21,7 +20,6 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="role" type="{http://www.furryaide.com/authentication/roles}UserRole"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,19 +31,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "username",
-    "password",
-    "role"
+    "password"
 })
-@XmlRootElement(name = "User", namespace = "http://www.furryaide.com/authentication")
-public class User {
+@XmlRootElement(name = "generateTokenRequest", namespace = "http://www.furryaide.com/authentication")
+public class GenerateTokenRequest {
 
     @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
     protected String username;
     @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
     protected String password;
-    @XmlElement(namespace = "http://www.furryaide.com/authentication", required = true)
-    @XmlSchemaType(name = "string")
-    protected UserRole role;
 
     /**
      * Gets the value of the username property.
@@ -93,30 +87,6 @@ public class User {
      */
     public void setPassword(String value) {
         this.password = value;
-    }
-
-    /**
-     * Gets the value of the role property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link UserRole }
-     *     
-     */
-    public UserRole getRole() {
-        return role;
-    }
-
-    /**
-     * Sets the value of the role property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link UserRole }
-     *     
-     */
-    public void setRole(UserRole value) {
-        this.role = value;
     }
 
 }

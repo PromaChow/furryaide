@@ -2,19 +2,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://www.furryaide.com/authentication"
            xmlns="http://www.furryaide.com/authentication"
-           xmlns:roles="http://www.furryaide.com/authentication/roles"
            elementFormDefault="qualified">
 
-    <xs:import namespace="http://www.furryaide.com/authentication/roles" schemaLocation="user-roles.xsd"/>
-<!--    <xs:simpleType name="UserRole">-->
-<!--        <xs:restriction base="xs:string">-->
-<!--            <xs:enumeration value="CUSTOMER"/>-->
-<!--            <xs:enumeration value="PET_RELINQUISHER"/>-->
-<!--            <xs:enumeration value="SELLER"/>-->
-<!--        </xs:restriction>-->
-<!--    </xs:simpleType>-->
-
-    <xs:element name="loginRequest">
+    <xs:element name="generateTokenRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="username" type="xs:string"/>
@@ -23,12 +13,11 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="loginResponse">
+    <xs:element name="generateTokenResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="token" type="xs:string"/>
                 <xs:element name="expiresIn" type="xs:int"/>
-                <xs:element name="role" type="roles:UserRole"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -46,8 +35,24 @@
             <xs:sequence>
                 <xs:element name="isValid" type="xs:boolean"/>
                 <xs:element name="userId" type="xs:string" minOccurs="0"/>
-                <xs:element name="role" type="roles:UserRole" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="hashPasswordRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="hashPasswordResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="hashedPassword" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>

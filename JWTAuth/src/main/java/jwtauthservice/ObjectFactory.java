@@ -1,5 +1,5 @@
 
-package authenticationservice;
+package jwtauthservice;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the authenticationservice package. 
+ * generated in the jwtauthservice package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,7 +23,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: authenticationservice
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: jwtauthservice
      * 
      */
     public ObjectFactory() {
@@ -46,19 +46,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link HashPasswordRequest }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
+    public HashPasswordRequest createHashPasswordRequest() {
+        return new HashPasswordRequest();
     }
 
     /**
-     * Create an instance of {@link LoginRequest }
+     * Create an instance of {@link HashPasswordResponse }
      * 
      */
-    public LoginRequest createLoginRequest() {
-        return new LoginRequest();
+    public HashPasswordResponse createHashPasswordResponse() {
+        return new HashPasswordResponse();
+    }
+
+    /**
+     * Create an instance of {@link GenerateTokenResponse }
+     * 
+     */
+    public GenerateTokenResponse createGenerateTokenResponse() {
+        return new GenerateTokenResponse();
+    }
+
+    /**
+     * Create an instance of {@link GenerateTokenRequest }
+     * 
+     */
+    public GenerateTokenRequest createGenerateTokenRequest() {
+        return new GenerateTokenRequest();
     }
 
 }
