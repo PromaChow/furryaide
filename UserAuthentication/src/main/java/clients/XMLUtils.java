@@ -54,7 +54,7 @@ public class XMLUtils {
     private static String formatXML(String unformattedXml) {
         try {
             Document document = parseXmlFile(unformattedXml);
-            NodeList nodeList = document.getElementsByTagName("ns2:token");
+            NodeList nodeList = document.getElementsByTagName("ns2:isValid");
             return nodeList.item(0).getTextContent();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -68,11 +68,5 @@ public class XMLUtils {
         return db.parse(is);
     }
 
-    public static String getTokenFromResponse(Document document) {
-        NodeList tokenNodes = document.getElementsByTagName("token");
-        if (tokenNodes.getLength() > 0) {
-            return tokenNodes.item(0).getTextContent();
-        }
-        return null;
-    }
+
 }

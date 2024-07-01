@@ -32,11 +32,10 @@ public class AuthenticationServiceEndpoint {
 		ObjectFactory factory = new ObjectFactory();
 		ValidateTokenResponse response = factory.createValidateTokenResponse();
 
-		// Dummy token validation
 		boolean isValid = request.getToken().startsWith("dummy-token-for-");
 		response.setIsValid(isValid);
 		response.setUserId(isValid ? request.getToken().substring(14) : null); // Extract username from token
-
+		System.out.println("valid"+response.isIsValid());
 		return response;
 	}
 

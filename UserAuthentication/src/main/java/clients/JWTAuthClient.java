@@ -40,6 +40,7 @@ public class JWTAuthClient {
                 "</soapenv:Envelope>";
 
         Document document = getParsedOutput(xmlInput, JWT_AUTH_SERVICE_URL);
-        return Boolean.parseBoolean(document.getElementsByTagName("isValid").item(0).getTextContent());
+//        System.out.println("hello"+Boolean.parseBoolean(document.getElementsByTagName("ns2:isValid").item(0).getTextContent()));
+        return Boolean.parseBoolean(document.getElementsByTagName("ns2:isValid").item(0).getTextContent());
     }
 }
