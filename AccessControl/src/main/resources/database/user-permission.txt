@@ -1,0 +1,4 @@
+john.doe:answer-question,make-payment,request-adoption
+jane.smith:manage-pet,receive-payment,make-question
+bob.jones:manage-pet,receive-payment,make-question
+
