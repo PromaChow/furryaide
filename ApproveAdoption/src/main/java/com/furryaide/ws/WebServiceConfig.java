@@ -26,7 +26,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 	@Bean(name="authenticationService")
 	public Wsdl11Definition defaultWsdl11Definition() {
 		SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
-		wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/RequestAdoptionService.wsdl"));
+		wsdl11Definition.setWsdl(new ClassPathResource("/wsdl/ApproveAdoptionService.wsdl"));
 		return wsdl11Definition;
 	}
 }

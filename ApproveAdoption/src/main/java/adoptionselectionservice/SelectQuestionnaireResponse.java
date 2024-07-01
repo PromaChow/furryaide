@@ -1,5 +1,5 @@
 
-package adoptionrequestservice;
+package adoptionselectionservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="statusCode" type="{http://www.furryaide/ws/StatusCodeService}statusCode"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "token"
+    "statusCode"
 })
-@XmlRootElement(name = "getPetListRequest", namespace = "http://www.furryaide/ws/AdoptionRequestService")
-public class GetPetListRequest {
+@XmlRootElement(name = "selectQuestionnaireResponse", namespace = "http://www.furryaide/ws/AdoptionSelectionService")
+public class SelectQuestionnaireResponse {
 
-    @XmlElement(namespace = "http://www.furryaide/ws/AdoptionRequestService", required = true)
-    protected String token;
+    @XmlElement(namespace = "http://www.furryaide/ws/AdoptionSelectionService", required = true)
+    protected StatusCode statusCode;
 
     /**
-     * Gets the value of the token property.
+     * Gets the value of the statusCode property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link StatusCode }
      *     
      */
-    public String getToken() {
-        return token;
+    public StatusCode getStatusCode() {
+        return statusCode;
     }
 
     /**
-     * Sets the value of the token property.
+     * Sets the value of the statusCode property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link StatusCode }
      *     
      */
-    public void setToken(String value) {
-        this.token = value;
+    public void setStatusCode(StatusCode value) {
+        this.statusCode = value;
     }
 
 }

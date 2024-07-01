@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://www.furryaide/ws/AdoptionRequestService"
-           targetNamespace="http://www.furryaide/ws/AdoptionRequestService"
-           xmlns:pet="http://www.furryaide/ws/Pet"
+           xmlns:tns="http://www.furryaide/ws/AdoptionSelectionService"
+           targetNamespace="http://www.furryaide/ws/AdoptionSelectionService"
            xmlns:sts="http://www.furryaide/ws/StatusCodeService"
            xmlns:qns="http://www.furryaide/ws/Question"
            elementFormDefault="qualified">
-    <xs:import namespace="http://www.furryaide/ws/Pet" schemaLocation="../../../../../central-schemas/pet.xsd"/>
+
     <xs:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>
     <xs:import namespace="http://www.furryaide.com/permission" schemaLocation="../../../../../central-schemas/permission.xsd"/>
     <xs:import namespace="http://www.furryaide/ws/Question" schemaLocation="../../../../../central-schemas/question.xsd"/>
 
-    <xs:element name="getPetListRequest">
+    <xs:element name="createQuestionnaireRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="token" type="xs:string"/>
+                <xs:element name="petId" type="xs:long"/>
+                <xs:element name="questionnaire" type="qns:Question"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getPetListResponse">
-
+    <xs:element name="createQuestionnaireResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element type="pet:Pet" minOccurs="0" maxOccurs="unbounded" name="pets" />
+                <xs:element name="statusCode" type="sts:statusCode"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="submitQuestionnaireRequest">
+    <xs:element name="selectQuestionnaireRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="token" type="xs:string"/>
-                <xs:element name="Questionnaire" type="qns:Question"/>
+                <xs:element name="petId" type="xs:long"/>
+                <xs:element name="questionnaireId" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="submitQuestionnaireResponse">
+    <xs:element name="selectQuestionnaireResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="status" type="sts:statusCode"/>
+                <xs:element name="statusCode" type="sts:statusCode"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-
-    <xs:element name="AdoptionRequestFault" type="xs:string" />
+    <xs:element name="adoptionSelectionFault" type="xs:string"/>
 </xs:schema>

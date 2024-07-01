@@ -1,5 +1,5 @@
 
-package adoptionrequestservice;
+package adoptionselectionservice;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the adoptionrequestservice package. 
+ * generated in the adoptionselectionservice package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -26,10 +26,10 @@ public class ObjectFactory {
 
     private final static QName _PetFault_QNAME = new QName("http://www.furryaide/ws/Pet", "petFault");
     private final static QName _QuestionnaireFault_QNAME = new QName("http://www.furryaide/ws/Question", "questionnaireFault");
-    private final static QName _AdoptionRequestFault_QNAME = new QName("http://www.furryaide/ws/AdoptionRequestService", "AdoptionRequestFault");
+    private final static QName _AdoptionSelectionFault_QNAME = new QName("http://www.furryaide/ws/AdoptionSelectionService", "adoptionSelectionFault");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: adoptionrequestservice
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: adoptionselectionservice
      * 
      */
     public ObjectFactory() {
@@ -68,14 +68,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SubmitQuestionnaireRequest }
-     * 
-     */
-    public SubmitQuestionnaireRequest createSubmitQuestionnaireRequest() {
-        return new SubmitQuestionnaireRequest();
-    }
-
-    /**
      * Create an instance of {@link Question }
      * 
      */
@@ -84,35 +76,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SubmitQuestionnaireResponse }
-     * 
-     */
-    public SubmitQuestionnaireResponse createSubmitQuestionnaireResponse() {
-        return new SubmitQuestionnaireResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetPetListResponse }
-     * 
-     */
-    public GetPetListResponse createGetPetListResponse() {
-        return new GetPetListResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetPetListRequest }
-     * 
-     */
-    public GetPetListRequest createGetPetListRequest() {
-        return new GetPetListRequest();
-    }
-
-    /**
      * Create an instance of {@link Questions }
      * 
      */
     public Questions createQuestions() {
         return new Questions();
+    }
+
+    /**
+     * Create an instance of {@link CreateQuestionnaireRequest }
+     * 
+     */
+    public CreateQuestionnaireRequest createCreateQuestionnaireRequest() {
+        return new CreateQuestionnaireRequest();
+    }
+
+    /**
+     * Create an instance of {@link CreateQuestionnaireResponse }
+     * 
+     */
+    public CreateQuestionnaireResponse createCreateQuestionnaireResponse() {
+        return new CreateQuestionnaireResponse();
+    }
+
+    /**
+     * Create an instance of {@link SelectQuestionnaireRequest }
+     * 
+     */
+    public SelectQuestionnaireRequest createSelectQuestionnaireRequest() {
+        return new SelectQuestionnaireRequest();
+    }
+
+    /**
+     * Create an instance of {@link SelectQuestionnaireResponse }
+     * 
+     */
+    public SelectQuestionnaireResponse createSelectQuestionnaireResponse() {
+        return new SelectQuestionnaireResponse();
     }
 
     /**
@@ -137,9 +137,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://www.furryaide/ws/AdoptionRequestService", name = "AdoptionRequestFault")
-    public JAXBElement<String> createAdoptionRequestFault(String value) {
-        return new JAXBElement<String>(_AdoptionRequestFault_QNAME, String.class, null, value);
+    @XmlElementDecl(namespace = "http://www.furryaide/ws/AdoptionSelectionService", name = "adoptionSelectionFault")
+    public JAXBElement<String> createAdoptionSelectionFault(String value) {
+        return new JAXBElement<String>(_AdoptionSelectionFault_QNAME, String.class, null, value);
     }
 
 }

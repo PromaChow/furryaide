@@ -1,5 +1,5 @@
 
-package adoptionrequestservice;
+package adoptionselectionservice;
 
 import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
