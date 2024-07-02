@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:ntf="http://www.furryaide/ws/Notification"
+           xmlns:ntf="http://www.furryaide/ws/NotificationService"
            xmlns:status="http://www.furryaide/ws/StatusCodeService"
-           xmlns="http://www.furryaide/ws/NotificationService"
            targetNamespace="http://www.furryaide/ws/NotificationService"
+           xmlns="http://www.furryaide/ws/NotificationService"
            elementFormDefault="qualified">
 
     <xs:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>

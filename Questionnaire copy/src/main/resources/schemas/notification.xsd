@@ -2,8 +2,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:chn="http://www.furryaide/ws/NotificationService"
            xmlns:vib="http://www.furryaide/ws/NotificationService"
-           targetNamespace="http://www.furryaide/ws/Notification"
-           xmlns="http://www.furryaide/ws/Notification"
+           targetNamespace="http://www.furryaide/ws/NotificationService"
+           xmlns="http://www.furryaide/ws/NotificationService"
            elementFormDefault="qualified">
 
     <xs:import namespace="http://www.furryaide/ws/NotificationService" schemaLocation="channel.xsd"/>

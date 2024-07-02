@@ -36,15 +36,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "channel", namespace = "http://www.furryaide/ws/channel", propOrder = {
+@XmlType(name = "channel", namespace = "http://www.furryaide/ws/NotificationService", propOrder = {
     "type",
     "address"
 })
 public class Channel {
 
-    @XmlElement(namespace = "http://www.furryaide/ws/channel", required = true)
+    @XmlElement(namespace = "http://www.furryaide/ws/NotificationService", required = true)
     protected String type;
-    @XmlElement(namespace = "http://www.furryaide/ws/channel")
+    @XmlElement(namespace = "http://www.furryaide/ws/NotificationService")
     protected String address;
 
     /**

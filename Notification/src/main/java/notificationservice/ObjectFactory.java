@@ -38,6 +38,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SendNotificationResponse }
+     * 
+     */
+    public SendNotificationResponse createSendNotificationResponse() {
+        return new SendNotificationResponse();
+    }
+
+    /**
+     * Create an instance of {@link StatusCode }
+     * 
+     */
+    public StatusCode createStatusCode() {
+        return new StatusCode();
+    }
+
+    /**
+     * Create an instance of {@link SendNotificationRequest }
+     * 
+     */
+    public SendNotificationRequest createSendNotificationRequest() {
+        return new SendNotificationRequest();
+    }
+
+    /**
      * Create an instance of {@link Channel }
      * 
      */
@@ -51,30 +75,6 @@ public class ObjectFactory {
      */
     public VibrationType createVibrationType() {
         return new VibrationType();
-    }
-
-    /**
-     * Create an instance of {@link StatusCode }
-     * 
-     */
-    public StatusCode createStatusCode() {
-        return new StatusCode();
-    }
-
-    /**
-     * Create an instance of {@link SendNotificationResponse }
-     * 
-     */
-    public SendNotificationResponse createSendNotificationResponse() {
-        return new SendNotificationResponse();
-    }
-
-    /**
-     * Create an instance of {@link SendNotificationRequest }
-     * 
-     */
-    public SendNotificationRequest createSendNotificationRequest() {
-        return new SendNotificationRequest();
     }
 
 }

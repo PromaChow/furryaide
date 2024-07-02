@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="vibrationType" type="{http://www.furryaide/ws/vibrationType}vibrationType"/>
- *         &lt;element name="channel" type="{http://www.furryaide/ws/channel}channel"/>
+ *         &lt;element name="vibrationType" type="{http://www.furryaide/ws/NotificationService}vibrationType"/>
+ *         &lt;element name="channel" type="{http://www.furryaide/ws/NotificationService}channel"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

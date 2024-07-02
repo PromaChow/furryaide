@@ -36,15 +36,15 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "vibrationType", namespace = "http://www.furryaide/ws/vibrationType", propOrder = {
+@XmlType(name = "vibrationType", namespace = "http://www.furryaide/ws/NotificationService", propOrder = {
     "pattern",
     "duration"
 })
 public class VibrationType {
 
-    @XmlElement(namespace = "http://www.furryaide/ws/vibrationType", required = true)
+    @XmlElement(namespace = "http://www.furryaide/ws/NotificationService", required = true)
     protected String pattern;
-    @XmlElement(namespace = "http://www.furryaide/ws/vibrationType")
+    @XmlElement(namespace = "http://www.furryaide/ws/NotificationService")
     protected Integer duration;
 
     /**

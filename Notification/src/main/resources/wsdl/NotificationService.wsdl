@@ -3,7 +3,7 @@
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   xmlns:ntf="http://www.furryaide/ws/Notification"
                   xmlns:status="http://www.furryaide/ws/StatusCodeService"
-                  xmlns:op="http://www.furryaide/ws/NotificationOperations"
+                  xmlns:op="http://www.furryaide/ws/NotificationService"
                   xmlns:tns="http://www.furryaide/ws/NotificationService"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                   targetNamespace="http://www.furryaide/ws/NotificationService">
@@ -12,7 +12,7 @@
         <xsd:schema>
             <xsd:import namespace="http://www.furryaide/ws/Notification" schemaLocation="../schemas/notification.xsd"/>
             <xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>
-            <xsd:import namespace="http://www.furryaide/ws/NotificationOperations" schemaLocation="../schemas/notification-operations.xsd"/>
+            <xsd:import namespace="http://www.furryaide/ws/NotificationService" schemaLocation="../schemas/notification-operations.xsd"/>
         </xsd:schema>
     </wsdl:types>
 
@@ -46,7 +46,7 @@
 
     <wsdl:service name="NotificationService">
         <wsdl:port name="NotificationServicePort" binding="tns:NotificationServiceSOAPBinding">
-            <soap:address location="http://localhost:5005/ws/notificationService"/>
+            <soap:address location="http://localhost:5005/wsdlfirst/NotificationService"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "notification"
 })
-@XmlRootElement(name = "sendNotificationRequest", namespace = "http://www.furryaide/ws/NotificationOperations")
+@XmlRootElement(name = "sendNotificationRequest", namespace = "http://www.furryaide/ws/NotificationService")
 public class SendNotificationRequest {
 
-    @XmlElement(namespace = "http://www.furryaide/ws/NotificationOperations", required = true)
+    @XmlElement(namespace = "http://www.furryaide/ws/NotificationService", required = true)
     protected Notification notification;
 
     /**
