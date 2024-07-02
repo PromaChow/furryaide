@@ -19,7 +19,7 @@ public class AccessControlServiceEndpoint {
 		boolean hasPermission = accessControlService.checkPermission(request.getToken(), request.getPermission());
 		CheckPermissionResponse response = new CheckPermissionResponse();
 		response.setHasPermission(hasPermission);
-		System.out.println(response.isHasPermission());
+		System.out.println(request.getPermission()+response.isHasPermission());
 		return response;
 	}
 }

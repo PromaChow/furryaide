@@ -27,7 +27,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="petId" type="xs:long"/>
-                <xs:element name="questionIds" type="xs:long" maxOccurs="unbounded"/>
+                <xs:element type="tns:Question" minOccurs="0" maxOccurs="unbounded" name="questions" />
                 <xs:element name="username" type="xs:string"/>
                 <xs:element name="token" type="xs:string"/>
             </xs:sequence>
@@ -66,7 +66,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="questionnaireId" type="xs:long"/>
-                <xs:element name="questionIds" type="xs:long" maxOccurs="unbounded"/>
+                <xs:element type="tns:Question" minOccurs="0" maxOccurs="unbounded" name="questions" />
                 <xs:element name="username" type="xs:string"/>
                 <xs:element name="token" type="xs:string"/>
             </xs:sequence>

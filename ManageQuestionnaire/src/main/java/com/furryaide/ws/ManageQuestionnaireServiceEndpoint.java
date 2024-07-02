@@ -20,7 +20,7 @@ public class ManageQuestionnaireServiceEndpoint {
 	public CreateQuestionnaireResponse createQuestionnaire(@RequestPayload CreateQuestionnaireRequest request) throws Exception {
 		CreateQuestionnaireResponse response = new CreateQuestionnaireResponse();
 		response.setQuestionnaireId(manageQuestionnaireService.createQuestionnaire(
-				request.getQuestionIds(),
+				request.getQuestions(),
 				request.getUsername(),
 				request.getPetId(),
 				request.getToken()).getId());
@@ -42,7 +42,7 @@ public class ManageQuestionnaireServiceEndpoint {
 	public UpdateQuestionnaireResponse updateQuestionnaire(@RequestPayload UpdateQuestionnaireRequest request) throws Exception {
 		manageQuestionnaireService.updateQuestionnaire(
 				request.getQuestionnaireId(),
-				request.getQuestionIds(),
+				request.getQuestions(),
 				request.getUsername(),
 				request.getToken());
 		UpdateQuestionnaireResponse response = new UpdateQuestionnaireResponse();

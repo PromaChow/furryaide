@@ -124,7 +124,7 @@
 
 	<wsdl:service name="ManageQuestionnaireService">
 		<wsdl:port name="ManageQuestionnairePort" binding="tns:manageQuestionnaireSOAPBinding">
-			<soap:address location="http://localhost:3005/wsdlfirst/manageQuestionnaireService"/>
+			<soap:address location="http://localhost:8080/wsdlfirst/manageQuestionnaireService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

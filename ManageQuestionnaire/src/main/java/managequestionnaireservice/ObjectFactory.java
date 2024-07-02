@@ -58,6 +58,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Question }
+     * 
+     */
+    public Question createQuestion() {
+        return new Question();
+    }
+
+    /**
      * Create an instance of {@link SubmitQuestionnaireRequest }
      * 
      */
@@ -119,14 +127,6 @@ public class ObjectFactory {
      */
     public Questionnaire createQuestionnaire() {
         return new Questionnaire();
-    }
-
-    /**
-     * Create an instance of {@link Question }
-     * 
-     */
-    public Question createQuestion() {
-        return new Question();
     }
 
     /**

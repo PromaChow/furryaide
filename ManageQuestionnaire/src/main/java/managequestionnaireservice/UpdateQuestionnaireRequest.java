@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="questionnaireId" type="{http://www.w3.org/2001/XMLSchema}long"/>
- *         &lt;element name="questionIds" type="{http://www.w3.org/2001/XMLSchema}long" maxOccurs="unbounded"/>
+ *         &lt;element name="questions" type="{http://www.furryaide/ws/ManageQuestionnaire}Question" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="username" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "questionnaireId",
-    "questionIds",
+    "questions",
     "username",
     "token"
 })
@@ -44,8 +44,8 @@ public class UpdateQuestionnaireRequest {
 
     @XmlElement(namespace = "http://www.furryaide/ws/ManageQuestionnaire")
     protected long questionnaireId;
-    @XmlElement(namespace = "http://www.furryaide/ws/ManageQuestionnaire", type = Long.class)
-    protected List<Long> questionIds;
+    @XmlElement(namespace = "http://www.furryaide/ws/ManageQuestionnaire")
+    protected List<Question> questions;
     @XmlElement(namespace = "http://www.furryaide/ws/ManageQuestionnaire", required = true)
     protected String username;
     @XmlElement(namespace = "http://www.furryaide/ws/ManageQuestionnaire", required = true)
@@ -68,30 +68,32 @@ public class UpdateQuestionnaireRequest {
     }
 
     /**
-     * Gets the value of the questionIds property.
-     *
+     * Gets the value of the questions property.
+     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the questionIds property.
-     *
+     * This is why there is not a <CODE>set</CODE> method for the questions property.
+     * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQuestionIds().add(newItem);
+     *    getQuestions().add(newItem);
      * </pre>
-     *
-     *
+     * 
+     * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Long }
+     * {@link Question }
+     * 
+     * 
      */
-    public List<Question> getQuestionIds() {
-        if (questionIds == null) {
-            questionIds = new ArrayList<Long>();
+    public List<Question> getQuestions() {
+        if (questions == null) {
+            questions = new ArrayList<Question>();
         }
-        return this.questionIds;
+        return this.questions;
     }
 
     /**

@@ -12,7 +12,7 @@ import static clients.XMLUtils.getParsedOutput;
 
 
 public class QuestionServiceClient {
-    private static final String QUESTION_SERVICE_URL = "http://localhost:3001/wsdlfirst/questionService";
+    private static final String QUESTION_SERVICE_URL = "http://localhost:3005/wsdlfirst/questionnaireService";
 
     public long createQuestion(Question question) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         String xmlInput = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ques=\"http://www.furryaide/ws/QuestionnaireService\" xmlns:ques1=\"http://www.furryaide/ws/Question\">" +
@@ -36,6 +36,6 @@ public class QuestionServiceClient {
                 "</soapenv:Envelope>";
 
         Document document = getParsedOutput(xmlInput,QUESTION_SERVICE_URL);
-        return Long.parseLong(document.getElementsByTagName("ques1:id").item(0).getTextContent());
+        return Long.parseLong(document.getElementsByTagName("ns3:id").item(0).getTextContent());
     }
 }

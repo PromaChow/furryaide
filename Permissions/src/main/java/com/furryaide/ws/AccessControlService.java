@@ -17,6 +17,8 @@ public class AccessControlService {
         Map <String, String> userPermissions = db.getPermissions();
         try {
             String username = getUsernameFromToken(token);
+            System.out.println("username"+username);
+            System.out.println("username"+userPermissions);
             if (username != null && userPermissions.containsKey(username)) {
                 String permissions = userPermissions.get(username);
                 return permissions.contains(permission);
