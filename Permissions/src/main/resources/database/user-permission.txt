@@ -1,4 +1,4 @@
-john.doe:answer-question,make-payment,request-adoption,view-pets,submit-questionnaire,approve-questionnaire request-adoption
+john.doe:answer-question,approve-adoption,make-payment,request-adoption,view-pets,submit-questionnaire,approve-questionnaire request-adoption
 jane.smith:manage-pet,receive-payment,make-question,approve-questionnaire
 bob.jones:manage-pet,receive-payment,make-question
 

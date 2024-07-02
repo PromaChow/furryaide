@@ -11,6 +11,7 @@
             <xs:element name="species" type="xs:string" />
             <xs:element name="breed" type="xs:string" />
             <xs:element name="age" type="xs:int" />
+            <xs:element name="adopted" type="xs:boolean"/>
         </xs:sequence>
     </xs:complexType>
 

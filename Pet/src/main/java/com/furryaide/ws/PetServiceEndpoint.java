@@ -78,6 +78,7 @@ public class PetServiceEndpoint {
 	public GetPetResponse getPet(@RequestPayload GetPetRequest request) {
 		ObjectFactory factory = new ObjectFactory();
 		GetPetResponse response = factory.createGetPetResponse();
+		System.out.println(request.getId());
 		Pet pet = petRepository.getPetById(request.getId());
 		response.setPet(pet);
 		return response;

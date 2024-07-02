@@ -1,5 +1,5 @@
 
-package petservice;
+package manageadoptionservice;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

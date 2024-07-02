@@ -19,7 +19,7 @@ import javax.xml.namespace.QName;
  * type definitions, element declarations and model 
  * groups.  Factory methods for each of these are 
  * provided in this class.
- * 
+ *
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -28,14 +28,14 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: manageadoptionservice
-     * 
+     *
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link ApproveAdoptionResponse }
-     * 
+     *
      */
     public ApproveAdoptionResponse createApproveAdoptionResponse() {
         return new ApproveAdoptionResponse();
@@ -43,7 +43,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelAdoptionRequest }
-     * 
+     *
      */
     public CancelAdoptionRequest createCancelAdoptionRequest() {
         return new CancelAdoptionRequest();
@@ -51,7 +51,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAdoptionDetailsResponse }
-     * 
+     *
      */
     public GetAdoptionDetailsResponse createGetAdoptionDetailsResponse() {
         return new GetAdoptionDetailsResponse();
@@ -59,7 +59,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Adoption }
-     * 
+     *
      */
     public Adoption createAdoption() {
         return new Adoption();
@@ -67,7 +67,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RejectAdoptionResponse }
-     * 
+     *
      */
     public RejectAdoptionResponse createRejectAdoptionResponse() {
         return new RejectAdoptionResponse();
@@ -75,7 +75,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RejectAdoptionRequest }
-     * 
+     *
      */
     public RejectAdoptionRequest createRejectAdoptionRequest() {
         return new RejectAdoptionRequest();
@@ -83,7 +83,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAdoptionStatusRequest }
-     * 
+     *
      */
     public GetAdoptionStatusRequest createGetAdoptionStatusRequest() {
         return new GetAdoptionStatusRequest();
@@ -91,7 +91,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RequestAdoptionResponse }
-     * 
+     *
      */
     public RequestAdoptionResponse createRequestAdoptionResponse() {
         return new RequestAdoptionResponse();
@@ -99,7 +99,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RequestAdoptionRequest }
-     * 
+     *
      */
     public RequestAdoptionRequest createRequestAdoptionRequest() {
         return new RequestAdoptionRequest();
@@ -107,7 +107,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAdoptionStatusResponse }
-     * 
+     *
      */
     public GetAdoptionStatusResponse createGetAdoptionStatusResponse() {
         return new GetAdoptionStatusResponse();
@@ -115,7 +115,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetAdoptionDetailsRequest }
-     * 
+     *
      */
     public GetAdoptionDetailsRequest createGetAdoptionDetailsRequest() {
         return new GetAdoptionDetailsRequest();
@@ -123,7 +123,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link CancelAdoptionResponse }
-     * 
+     *
      */
     public CancelAdoptionResponse createCancelAdoptionResponse() {
         return new CancelAdoptionResponse();
@@ -131,7 +131,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link ApproveAdoptionRequest }
-     * 
+     *
      */
     public ApproveAdoptionRequest createApproveAdoptionRequest() {
         return new ApproveAdoptionRequest();
@@ -139,7 +139,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "http://www.furryaide/ws/AdoptionManagement", name = "adoptionFault")
     public JAXBElement<String> createAdoptionFault(String value) {

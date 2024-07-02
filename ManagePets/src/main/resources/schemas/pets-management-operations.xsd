@@ -46,4 +46,25 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="notifyInterestedPartiesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string" />
+                <xs:element name="message" type="xs:string" />
+                <xs:element name="channel" type="xs:string" />
+                <xs:element name="recipient" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="notifyInterestedPartiesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="statusCode" type="sts:statusCode" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+
 </xs:schema>

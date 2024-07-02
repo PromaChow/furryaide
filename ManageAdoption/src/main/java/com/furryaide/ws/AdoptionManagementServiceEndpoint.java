@@ -2,6 +2,7 @@ package com.furryaide.ws;
 
 import clients.AccessControlClient;
 import clients.NotificationClient;
+import clients.PetClient;
 import manageadoptionservice.*;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -13,6 +14,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import org.xml.sax.SAXException;
+
+import static clients.PetClient.getPetById;
 
 @Endpoint
 public class AdoptionManagementServiceEndpoint {
@@ -27,6 +30,12 @@ public class AdoptionManagementServiceEndpoint {
 	private boolean sendNotification(String token, String type, String message, String pattern, String duration, String channelType, String address) throws IOException, ParserConfigurationException, SAXException {
 		return NotificationClient.sendNotification(token, type, message, pattern, duration, channelType, address);
 	}
+
+
+	private boolean updatePetStatus(Pet pet) throws IOException, ParserConfigurationException, SAXException {
+		return PetClient.updatePetStatus(pet);
+	}
+
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "requestAdoptionRequest")
 	@ResponsePayload
 	public RequestAdoptionResponse requestAdoption(@RequestPayload RequestAdoptionRequest request) throws Exception {
@@ -37,7 +46,7 @@ public class AdoptionManagementServiceEndpoint {
 			sendNotification(request.getToken(), "INFO", "Adoption request created successfully with ID: " + adoptionRequestId, "default", null, "EMAIL", "customer@example.com");
 
 			RequestAdoptionResponse response = new RequestAdoptionResponse();
-			response.setAdoptionRequestID(adoptionRequestId);
+			response.setAdoptionRequestID(request.getId());
 			response.setStatus("Adoption request created successfully");
 			return response;
 		} else {
@@ -51,9 +60,11 @@ public class AdoptionManagementServiceEndpoint {
 		if (checkPermission(request.getToken(), "approve-adoption")) {
 			boolean isApproved = adoptionManagementService.approveAdoption(request.getAdoptionRequestID(), request.getRelinquisherID());
 			if (isApproved) {
+				Pet pet = getPetById(request.getAdoptionRequestID());
+				pet.setAdopted(true);
+				updatePetStatus(pet);
 				sendNotification(request.getToken(), "SUCCESS", "Adoption approved successfully for ID: " + request.getAdoptionRequestID(), "default", null, "SMS", "customer@example.com");
 			}
-
 			ApproveAdoptionResponse response = new ApproveAdoptionResponse();
 			response.setStatus(isApproved ? "Adoption approved successfully" : "Failed to approve adoption");
 			return response;

@@ -16,50 +16,40 @@ public class AdoptionManagementService {
         request.setCustomerID(customerID);
         request.setPetID(petID);
         request.setStatus(Status.PENDING);
-        adoptionRequests.put(request.getId(), request);
+        adoptionRequests.put(request.getPetID(), request);
+        System.out.println(request.getPetID());
+//        System.out.println("adopt"+adoptionRequests.get(request.getPetID()));
         return request.getId();
     }
 
     public boolean approveAdoption(long adoptionRequestID, long relinquisherID) {
+
         RequestAdoptionRequest request = adoptionRequests.get(adoptionRequestID);
-        if (request != null && request.getStatus() == Status.PENDING) {
-            request.setStatus(Status.APPROVED);
+        request.setStatus(Status.APPROVED);
+        System.out.println(request.getStatus());
+        adoptionRepository.addAdoptionRecord(request.getCustomerID(), request.getPetID(), relinquisherID);
 
-
-            // Store approved adoption details
-            adoptionRepository.addAdoptionRecord(request.getCustomerID(), request.getPetID(), relinquisherID);
-
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public boolean rejectAdoption(long adoptionRequestID, long relinquisherID) {
         RequestAdoptionRequest request = adoptionRequests.get(adoptionRequestID);
-        if (request != null && request.getStatus() == Status.PENDING) {
-            request.setStatus(Status.REJECTED);
+        request.setStatus(Status.REJECTED);
 
-            return true;
-        }
-        return false;
+        return true;
+
     }
 
     public boolean cancelAdoption(long adoptionRequestID, String reason) {
         RequestAdoptionRequest request = adoptionRequests.get(adoptionRequestID);
-        if (request != null && request.getStatus() == Status.PENDING) {
-            request.setStatus(Status.CANCELLED);
+        request.setStatus(Status.CANCELLED);
 
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public Status getAdoptionStatus(long adoptionRequestID) {
         RequestAdoptionRequest request = adoptionRequests.get(adoptionRequestID);
-        if (request != null) {
-            return request.getStatus();
-        }
-        return null;
+        return request.getStatus();
     }
 
     public Adoption getAdoptionDetails(long adoptionRequestID) {

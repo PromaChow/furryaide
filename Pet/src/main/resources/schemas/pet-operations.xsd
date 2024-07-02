@@ -5,7 +5,11 @@
             xmlns:pet="http://www.furryaide/ws/Pet"
             targetNamespace="http://www.furryaide/ws/PetService"
             elementFormDefault="qualified">
+
+    <xs:import namespace="http://www.furryaide/ws/Pet" schemaLocation="../../../../../central-schemas/pet.xsd"/>
         <xs:element name="createPetRequest">
+
+
             <xs:complexType>
                 <xs:sequence>
                     <xs:element name="Pet" type="pet:Pet" />

@@ -10,7 +10,7 @@
 
 	<wsdl:types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.furryaide/ws/Pet" schemaLocation="../schemas/pet.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/Pet" schemaLocation="../../../../../central-schemas/pet.xsd"/>
 			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>
 			<xsd:import namespace="http://www.furryaide/ws/PetService" schemaLocation="../schemas/pet-operations.xsd"/>
 		</xsd:schema>
