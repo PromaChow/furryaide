@@ -1,6 +1,7 @@
 package com.furryaide.ws;
 
 import clients.AccessControlClient;
+import clients.NotificationClient;
 import manageadoptionservice.*;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -23,7 +24,9 @@ public class AdoptionManagementServiceEndpoint {
 	private boolean checkPermission(String token, String permission) throws IOException, ParserConfigurationException, SAXException {
 		return AccessControlClient.checkPermission(token, permission);
 	}
-
+	private boolean sendNotification(String token, String type, String message, String pattern, String duration, String channelType, String address) throws IOException, ParserConfigurationException, SAXException {
+		return NotificationClient.sendNotification(token, type, message, pattern, duration, channelType, address);
+	}
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "requestAdoptionRequest")
 	@ResponsePayload
 	public RequestAdoptionResponse requestAdoption(@RequestPayload RequestAdoptionRequest request) throws Exception {
@@ -31,6 +34,8 @@ public class AdoptionManagementServiceEndpoint {
 			long adoptionRequestId = adoptionManagementService.requestAdoption(
 					request.getCustomerID(),
 					request.getPetID());
+			sendNotification(request.getToken(), "INFO", "Adoption request created successfully with ID: " + adoptionRequestId, "default", null, "EMAIL", "customer@example.com");
+
 			RequestAdoptionResponse response = new RequestAdoptionResponse();
 			response.setAdoptionRequestID(adoptionRequestId);
 			response.setStatus("Adoption request created successfully");
@@ -45,6 +50,10 @@ public class AdoptionManagementServiceEndpoint {
 	public ApproveAdoptionResponse approveAdoption(@RequestPayload ApproveAdoptionRequest request) throws Exception {
 		if (checkPermission(request.getToken(), "approve-adoption")) {
 			boolean isApproved = adoptionManagementService.approveAdoption(request.getAdoptionRequestID(), request.getRelinquisherID());
+			if (isApproved) {
+				sendNotification(request.getToken(), "SUCCESS", "Adoption approved successfully for ID: " + request.getAdoptionRequestID(), "default", null, "SMS", "customer@example.com");
+			}
+
 			ApproveAdoptionResponse response = new ApproveAdoptionResponse();
 			response.setStatus(isApproved ? "Adoption approved successfully" : "Failed to approve adoption");
 			return response;
@@ -58,6 +67,10 @@ public class AdoptionManagementServiceEndpoint {
 	public RejectAdoptionResponse rejectAdoption(@RequestPayload RejectAdoptionRequest request) throws Exception {
 		if (checkPermission(request.getToken(), "reject-adoption")) {
 			boolean isRejected = adoptionManagementService.rejectAdoption(request.getAdoptionRequestID(), request.getRelinquisherID());
+			if (isRejected) {
+				sendNotification(request.getToken(), "ERROR", "Adoption rejected for ID: " + request.getAdoptionRequestID(), "default", null, "EMAIL", "customer@example.com");
+			}
+
 			RejectAdoptionResponse response = new RejectAdoptionResponse();
 			response.setStatus(isRejected ? "Adoption rejected successfully" : "Failed to reject adoption");
 			return response;
@@ -71,6 +84,10 @@ public class AdoptionManagementServiceEndpoint {
 	public CancelAdoptionResponse cancelAdoption(@RequestPayload CancelAdoptionRequest request) throws Exception {
 		if (checkPermission(request.getToken(), "cancel-adoption")) {
 			boolean isCancelled = adoptionManagementService.cancelAdoption(request.getAdoptionRequestID(), request.getReason());
+			if (isCancelled) {
+				sendNotification(request.getToken(), "INFO", "Adoption cancelled for ID: " + request.getAdoptionRequestID(), "default", null, "EMAIL", "customer@example.com");
+			}
+
 			CancelAdoptionResponse response = new CancelAdoptionResponse();
 			response.setStatus(isCancelled ? "Adoption cancelled successfully" : "Failed to cancel adoption");
 			return response;
@@ -79,8 +96,6 @@ public class AdoptionManagementServiceEndpoint {
 		}
 	}
 
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAdoptionStatusRequest")
-	@ResponsePayload
 	public GetAdoptionStatusResponse getAdoptionStatus(@RequestPayload GetAdoptionStatusRequest request) throws Exception {
 		if (checkPermission(request.getToken(), "get-adoption-status")) {
 			Status status = adoptionManagementService.getAdoptionStatus(request.getAdoptionRequestID());

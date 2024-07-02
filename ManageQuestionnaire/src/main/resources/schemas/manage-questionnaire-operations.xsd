@@ -2,32 +2,20 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:tns="http://www.furryaide/ws/ManageQuestionnaire"
            targetNamespace="http://www.furryaide/ws/ManageQuestionnaire"
+           xmlns:qns="http://www.furryaide/ws/Question"
+           xmlns:qa="http://www.furryaide/ws/Questionnaire"
            elementFormDefault="qualified">
+    <xs:import namespace="http://www.furryaide/ws/Question" schemaLocation="../../../../../central-schemas/question.xsd"/>
 
-    <xs:complexType name="Question">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long" />
-            <xs:element name="text" type="xs:string" />
-            <xs:element name="type" type="xs:string" />
-            <xs:element name="options" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
 
-    <xs:complexType name="Questionnaire">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
-            <xs:element name="questionIds" type="xs:long" maxOccurs="unbounded"/>
-            <xs:element name="username" type="xs:string"/>
-            <xs:element name="status" type="xs:string"/>
-            <xs:element name="petId" type="xs:long"/>
-        </xs:sequence>
-    </xs:complexType>
+
+
 
     <xs:element name="createQuestionnaireRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="petId" type="xs:long"/>
-                <xs:element type="tns:Question" minOccurs="0" maxOccurs="unbounded" name="questions" />
+                <xs:element type="qns:Question" minOccurs="0" maxOccurs="unbounded" name="questions" />
                 <xs:element name="username" type="xs:string"/>
                 <xs:element name="token" type="xs:string"/>
             </xs:sequence>
@@ -66,7 +54,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="questionnaireId" type="xs:long"/>
-                <xs:element type="tns:Question" minOccurs="0" maxOccurs="unbounded" name="questions" />
+                <xs:element type="qns:Question" minOccurs="0" maxOccurs="unbounded" name="questions" />
                 <xs:element name="username" type="xs:string"/>
                 <xs:element name="token" type="xs:string"/>
             </xs:sequence>
@@ -111,7 +99,7 @@
     <xs:element name="getQuestionnaireByIdResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="questionnaire" type="tns:Questionnaire"/>
+                <xs:element name="questionnaire" type="qa:Questionnaire"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

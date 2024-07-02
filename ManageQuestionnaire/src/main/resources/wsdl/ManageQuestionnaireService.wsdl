@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-
+				  xmlns:qns="http://www.furryaide/ws/Question"
 				  xmlns:tns="http://www.furryaide/ws/ManageQuestionnaire"
 				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+
 				  xmlns:operations="http://www.furryaide/ws/ManageQuestionnaire"
 				  xmlns="http://www.furryaide/ws/ManageQuestionnaire"
 
@@ -12,11 +13,13 @@
 	<wsdl:types>
 		<xsd:schema>
 			<xsd:import namespace="http://www.furryaide/ws/ManageQuestionnaire" schemaLocation="../schemas/manage-questionnaire-operations.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/Question" schemaLocation="../../../../../central-schemas/question.xsd"/>
+
 		</xsd:schema>
 	</wsdl:types>
 
 	<wsdl:message name="questionnaireFault">
-		<wsdl:part name="params" element="operations:questionnaireFault"/>
+		<wsdl:part name="params" element="qns:questionnaireFault"/>
 	</wsdl:message>
 
 	<wsdl:message name="createQuestionnaireRequestMsg">

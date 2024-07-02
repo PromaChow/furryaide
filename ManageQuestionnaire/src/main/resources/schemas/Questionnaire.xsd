@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.furryaide/ws/Questionnaire"
+           targetNamespace="http://www.furryaide/ws/Questionnaire"
+           elementFormDefault="qualified">
+
+
+
+    <xs:complexType name="Questionnaire">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="questionIds" type="xs:long" maxOccurs="unbounded"/>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="petId" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
