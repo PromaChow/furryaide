@@ -25,6 +25,8 @@ There are two main actors in the system:
 3. **Pet Relinquisher creates a questionnaire to check if the customer is eligible for adopting**
 4. **Pet Relinquisher approves adoption**
 
+The thought process when designing the services was from the perspective how each events will happen in the user interface and how each service needs to be invoked. For example, we have two roles in our system and each role will be able to access certain services. So, instead of creating two separate services namely Customer and Pet Relinquisher it seemed more convenient to us to introduce `User` and `Permissions` Services. Moreover, each of the services responsibility was carefully designed so that it doesn't become reduntant while maintaining the SOA principles. The services we have designed are
+
 ## Utility Services
 
 ### JWTAuth Service
@@ -60,7 +62,7 @@ The Send Notification service includes functionalities like sending notification
 
 ## SOA Principles
 
-### Principle 1: Service Contracts and Standardization
+### Principle #1: Service Contracts and Standardization
 This principle states that: “Services share standardized contracts. Services within the same service inventory are in compliance with the same contract design standards.”
 
 #### Design Standards
@@ -76,7 +78,7 @@ This principle states that: “Services share standardized contracts. Services w
 - XML Schema Definitions: All XML schema definitions must reside in separate files that are linked to the WSDL definitions.
 - Centralized Schemas: The schemas reused by multiple services are stored in the central-schemas folder.
 
-### Principle 2: Service Abstraction
+### Principle #2: Service Abstraction
 Service abstraction is a principle that emphasizes hiding the implementation details of a service and exposing only the essential information necessary for consumers to interact with it. This principle ensures that:
 
 - **Non-essential Information**: Any non-essential information about the service is abstracted away.
@@ -90,7 +92,7 @@ Service abstraction is a principle that emphasizes hiding the implementation det
 **Programmatic Abstraction (Access Control)** | Open Access: Source code and design specifications are openly available on the local LAN, allowing developers to review and understand the implementation details if necessary.
 **Quality of Service (Access Control)** | Open Access: Since we are not developing our project for industry currently, we have not documented the components of the SLA (except for service description) as mentioned in the official website of IBM (https://www.ibm.com/topics/service-level-agreement).
 
-### Principle 3: Service Reusability
+### Principle #3: Service Reusability
 This principle states that "services contain and express agnostic logic and can be positioned as reusable enterprise resources.” This section details the reuse measurement of different services within the Furryaide application. The table below shows how many times each service has been reused across other services, providing insight into the reusability and utilization of these services.
 
 | **Service**             | **Amount of Service Consumers** | **Used In**                               | **Type of Reusability** |
@@ -100,12 +102,12 @@ This principle states that "services contain and express agnostic logic and can 
 | **Permissions Service**       | 2                               |  ApproveAdoption, RequestAdoption | Targeted                |
 | **Questionnaire Service**       | 2                               | ApproveAdoption, RequestAdoption          | Complete                |
 | **Pets Service**                | 1                               | RequestAdoption                           | Complete                |
-| **Notification Service**        | 1                               | Notification Management                   | Complete                |
-| **Notification Management** | 0                            | -                                         | Tactical                |
+| **Notification Service**        | 0                               | -                   | Complete                |
+
 
 The book stated two types of measures based on the number of service consumers and the frequency at which the consumers have consumed it. However, we are at a preliminary stage of development and have not integrated the services with the user interface to state the frequency yet. So, we have not integrated that measure here.
 
-### Principle 4: Service Autonomy
+### Principle #4: Service Autonomy
 The autonomy levels mentioned in the book are -
 
 #### Service Isolation Levels
@@ -129,7 +131,7 @@ The table contains justification for how we achieved or omitted each type of cou
 | **Contract-to-Implementation Coupling** | Happens when service contracts are tied to specific implementations, including data models and APIs.                       | `Omitted` by abstracting implementation details and focusing on service capabilities in the contracts. Each Entity Service also maintains a dedicated database.                  |
 | **Contract-to-Functional Coupling** | This occurs when a service contract is tightly coupled to a specific functionality or process within the enterprise.         | Achieved by designing task services like `RequestAdoption` Service and `ApproveAdoption` Service are intentionally designed with functional coupling to specific business processes, ensuring they fulfill targeted roles effectively.|
 
-### Principle #5: Statelessness
+### Principle #6: Statelessness
 In the Furryaide application, we have implemented a design strategy known as Internally Deferred State Management to achieve high statelessness. This approach focuses on minimizing the amount of state information that is retained by services between requests. Here, we explain the strategy from the perspective of different types of state data: session data, context data, and business data.
 
 ### Types of State Data:
@@ -150,3 +152,11 @@ In the Furryaide application, we have implemented a design strategy known as Int
 - **Implementation in Furryaide**:
   - **Database Interactions**: Business data is stored in dedicated databases. Services interact with the database to fetch or update business data as needed. This approach ensures that no business data is retained in the service layer between requests. For example, when a user submits an adoption request, the service processes the request by interacting with the database to fetch the relevant `Pet` and `Questionnaire` information from the dedicated databases embedded in their corresponding Entity Services.
   - **Persistent Storage**: By using persistent storage (databases), we ensure that business data is always available and up-to-date without requiring the service to maintain state.
+
+### Principle #7: Composability of Services
+
+In the Furryaide application, the services are composable. For instance, the `requestAdoption` service allows customers to browse pets, select a pet for adoption, and submit the necessary questionnaires. This service utilizes shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the customer,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service, `getAllPets` provided by the `Pet`, `getQuestion` from the  `Questionnaire` service.
+
+On the other hand, the `approveAdoption` service enables pet relinquishers to review submitted questionnaires, approve adoption requests, and manage the adoption process. This service also leverages shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the pet relinquisher,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service. 
+
+
