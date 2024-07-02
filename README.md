@@ -130,14 +130,14 @@ The table contains justification for how we achieved or omitted each type of cou
 | **Contract-to-Functional Coupling** | This occurs when a service contract is tightly coupled to a specific functionality or process within the enterprise.         | Achieved by designing task services like `RequestAdoption` Service and `ApproveAdoption` Service are intentionally designed with functional coupling to specific business processes, ensuring they fulfill targeted roles effectively.|
 
 ### Principle #5: Statelessness
-n the Furryaide application, we have implemented a design strategy known as Internally Deferred State Management to achieve high statelessness. This approach focuses on minimizing the amount of state information that is retained by services between requests, thereby promoting scalability, reliability, and ease of maintenance. Here, we explain the strategy from the perspective of different types of state data: session data, context data, and business data.
+In the Furryaide application, we have implemented a design strategy known as Internally Deferred State Management to achieve high statelessness. This approach focuses on minimizing the amount of state information that is retained by services between requests. Here, we explain the strategy from the perspective of different types of state data: session data, context data, and business data.
 
 ### Types of State Data:
 
 #### Session Data:
 - **Definition**: Session data refers to temporary data that pertains to a user's interaction with a service during a session. This can include user preferences, temporary authentication tokens, and other transient information.
 - **Implementation in Furryaide**:
-  - **Token-Based Authentication**: We use JWT (JSON Web Token) for authentication, which allows the user’s state (authentication details) to be encapsulated within the token itself. This eliminates the need for the service to maintain session state between requests. The token contains all necessary information, such as user identity and roles, which the service can decode and use to authenticate requests without maintaining session data.
+  - **Token-Based Authentication**: We use JWT (JSON Web Token) for authentication provided by the `JWTAuth` service, which allows the user’s state (authentication details) to be encapsulated within the token itself. This eliminates the need for the service to maintain session state between requests. The token contains all necessary information, such as user identity and roles, which the service can decode and use to authenticate requests without maintaining session data.
 
 #### Context Data:
 - **Definition**: Context data includes information about the specific context of a transaction or request, such as request parameters, user location, and temporary settings that are relevant only for the duration of the transaction.
@@ -146,7 +146,7 @@ n the Furryaide application, we have implemented a design strategy known as Inte
   - **Stateless Operations**: Services are designed to process each request independently, relying entirely on the data provided within the request and the database. This ensures that context data is not stored or reused between requests.
 
 #### Business Data:
-- **Definition**: Business data consists of core data that is central to the business logic and operations, such as user profiles, pet information, adoption records, and other persistent data.
+- **Definition**: Business data consists of core data that is central to the business logic and operations, such as user profiles, pet information, questionnaire information, and other persistent data.
 - **Implementation in Furryaide**:
-  - **Database Interactions**: Business data is stored in dedicated databases. Services interact with the database to fetch or update business data as needed. This approach ensures that no business data is retained in the service layer between requests. For example, when a user submits an adoption request, the service processes the request by interacting with the database to fetch the relevant pet and user information, and then stores the adoption record in the database.
+  - **Database Interactions**: Business data is stored in dedicated databases. Services interact with the database to fetch or update business data as needed. This approach ensures that no business data is retained in the service layer between requests. For example, when a user submits an adoption request, the service processes the request by interacting with the database to fetch the relevant `Pet` and `Questionnaire` information from the dedicated databases embedded in their corresponding Entity Services.
   - **Persistent Storage**: By using persistent storage (databases), we ensure that business data is always available and up-to-date without requiring the service to maintain state.
