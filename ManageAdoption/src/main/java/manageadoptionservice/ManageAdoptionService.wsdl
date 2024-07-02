@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:tns="http://www.furryaide/ws/AdoptionManagement"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  xmlns:operations="http://www.furryaide/ws/AdoptionManagement"
+				  targetNamespace="http://www.furryaide/ws/AdoptionManagement"
+				  >
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide/ws/AdoptionManagement" schemaLocation="../schemas/manage-adoption-operations.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="adoptionFault">
+		<wsdl:part name="params" element="operations:adoptionFault"/>
+	</wsdl:message>
+
+	<wsdl:message name="requestAdoptionRequestMsg">
+		<wsdl:part name="params" element="operations:requestAdoptionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="requestAdoptionResponseMsg">
+		<wsdl:part name="params" element="operations:requestAdoptionResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="approveAdoptionRequestMsg">
+		<wsdl:part name="params" element="operations:approveAdoptionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="approveAdoptionResponseMsg">
+		<wsdl:part name="params" element="operations:approveAdoptionResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="rejectAdoptionRequestMsg">
+		<wsdl:part name="params" element="operations:rejectAdoptionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="rejectAdoptionResponseMsg">
+		<wsdl:part name="params" element="operations:rejectAdoptionResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="cancelAdoptionRequestMsg">
+		<wsdl:part name="params" element="operations:cancelAdoptionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="cancelAdoptionResponseMsg">
+		<wsdl:part name="params" element="operations:cancelAdoptionResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="getAdoptionStatusRequestMsg">
+		<wsdl:part name="params" element="operations:getAdoptionStatusRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getAdoptionStatusResponseMsg">
+		<wsdl:part name="params" element="operations:getAdoptionStatusResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="getAdoptionDetailsRequestMsg">
+		<wsdl:part name="params" element="operations:getAdoptionDetailsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getAdoptionDetailsResponseMsg">
+		<wsdl:part name="params" element="operations:getAdoptionDetailsResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="AdoptionManagementPortType">
+		<wsdl:operation name="requestAdoption">
+			<wsdl:input message="tns:requestAdoptionRequestMsg"/>
+			<wsdl:output message="tns:requestAdoptionResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:adoptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="approveAdoption">
+			<wsdl:input message="tns:approveAdoptionRequestMsg"/>
+			<wsdl:output message="tns:approveAdoptionResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:adoptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="rejectAdoption">
+			<wsdl:input message="tns:rejectAdoptionRequestMsg"/>
+			<wsdl:output message="tns:rejectAdoptionResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:adoptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="cancelAdoption">
+			<wsdl:input message="tns:cancelAdoptionRequestMsg"/>
+			<wsdl:output message="tns:cancelAdoptionResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:adoptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAdoptionStatus">
+			<wsdl:input message="tns:getAdoptionStatusRequestMsg"/>
+			<wsdl:output message="tns:getAdoptionStatusResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:adoptionFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAdoptionDetails">
+			<wsdl:input message="tns:getAdoptionDetailsRequestMsg"/>
+			<wsdl:output message="tns:getAdoptionDetailsResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:adoptionFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="adoptionManagementSOAPBinding" type="tns:AdoptionManagementPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="requestAdoption">
+			<soap:operation soapAction="requestAdoption"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="approveAdoption">
+			<soap:operation soapAction="approveAdoption"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="rejectAdoption">
+			<soap:operation soapAction="rejectAdoption"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="cancelAdoption">
+			<soap:operation soapAction="cancelAdoption"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getAdoptionStatus">
+			<soap:operation soapAction="getAdoptionStatus"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getAdoptionDetails">
+			<soap:operation soapAction="getAdoptionDetails"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="AdoptionManagementService">
+		<wsdl:port name="AdoptionManagementPort" binding="tns:adoptionManagementSOAPBinding">
+			<soap:address location="http://localhost:6060/wsdlfirst/adoptionManagementService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

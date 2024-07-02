@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.furryaide/ws/AdoptionManagement"
+           targetNamespace="http://www.furryaide/ws/AdoptionManagement"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="Status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PENDING"/>
+            <xs:enumeration value="APPROVED"/>
+            <xs:enumeration value="REJECTED"/>
+            <xs:enumeration value="CANCELLED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+
+    <xs:complexType name="Adoption">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="customerID" type="xs:long"/>
+            <xs:element name="petID" type="xs:long"/>
+            <xs:element name="status" type="tns:Status"/>
+            <xs:element name="relinquisherID" type="xs:long"/>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="requestAdoptionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="customerID" type="xs:long"/>
+                <xs:element name="petID" type="xs:long"/>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="status" type="tns:Status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="requestAdoptionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionRequestID" type="xs:long"/>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="approveAdoptionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionRequestID" type="xs:long"/>
+                <xs:element name="relinquisherID" type="xs:long"/>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="approveAdoptionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rejectAdoptionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionRequestID" type="xs:long"/>
+                <xs:element name="relinquisherID" type="xs:long"/>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="cancellationReason" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rejectAdoptionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelAdoptionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionRequestID" type="xs:long"/>
+                <xs:element name="reason" type="xs:string"/>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="cancellationReason" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="cancelAdoptionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAdoptionStatusRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionRequestID" type="xs:long"/>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAdoptionStatusResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="tns:Status"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAdoptionDetailsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionRequestID" type="xs:long"/>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAdoptionDetailsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adoptionDetails" type="tns:Adoption"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="adoptionFault" type="xs:string"/>
+</xs:schema>
