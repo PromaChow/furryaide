@@ -12,7 +12,7 @@
 		<xsd:schema>
 			<xsd:import namespace="http://www.furryaide/ws/Question" schemaLocation="../../../../../central-schemas/question.xsd"/>
 			<xsd:import namespace="http://www.furryaide/ws/QuestionnaireService" schemaLocation="../schemas/question-operations.xsd"/>
-			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>
 		</xsd:schema>
 	</wsdl:types>
 
