@@ -160,6 +160,7 @@ The table contains justification for how we achieved or omitted each type of cou
 ### Principle #6: Statelessness
 In the Furryaide application, we have implemented a design strategy known as Internally Deferred State Management to achieve high statelessness. This approach focuses on minimizing the amount of state information that is retained by services between requests. Here, we explain the strategy from the perspective of different types of state data: session data, context data, and business data.
 
+
 ### Types of State Data:
 
 #### Session Data:
@@ -184,6 +185,12 @@ In the Furryaide application, we have implemented a design strategy known as Int
 In the Furryaide application, the services are composable. For instance, the `requestAdoption` service allows customers to browse pets, select a pet for adoption, and submit the necessary questionnaires. This service utilizes shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the customer,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service, `getAllPets` provided by the `Pet`, `getQuestion` from the  `Questionnaire` service.
 
 On the other hand, the `approveAdoption` service enables pet relinquishers to review submitted questionnaires, approve adoption requests, and manage the adoption process. This service also leverages shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the pet relinquisher,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service. 
+
+**Some things to be noted-**
+- We promised to develop an adoption service where the Customer will be able to login and request adoption and the Relinquisher will be able to approve the requests.
+- We did not promise profile management or notification services to be integrated. Hence, we did not explicitly handle those in our scenerio for now. Even though, we have developed Notification Utility service, we did not develop a task service to integrate it with any Entity Service.
+- We believe the developed services fulfill the basic requirements or functionalities to get a Pet Adoption application up and running. Hence, we do think we have developed the functionalities we have promised.
+- We have additionally developed Customer and PetRelinquisher services in somewhat incomplete way. We did not mention in our scenerio before. The reason is we developed it keeping User Profile Management in mind. But since we have not promised it, we did not intergate the services. Moreover, since our entire system is role based we do not think extra services specifying roles like Customer and PetRelinquisher is necessary for our scenerio. 
 
 From the marking perspective, 50% was allocated if we could show we can run a service successfully. So, for that, we are going to add screenshots of the `User` service because we have developed it the very first.
 # Service Execution Proof
