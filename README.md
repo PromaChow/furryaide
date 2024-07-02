@@ -2,7 +2,7 @@
 
 ## Overview
 
-Furryaide is a SOAP-based application designed to facilitate the process of pet adoption. It enables users to list pets for adoption, apply for adoption, and manage pet adoption-related operations. The architecture follows Service-Oriented Architecture (SOA) principles, ensuring schema centralization, loose coupling, and service reusability.
+Furryaide is a SOAP-based application designed to facilitate the process of pet adoption. It enables users to list pets for adoption, apply for adoption, and manage pet adoption-related operations. The architecture follows Service-Oriented Architecture (SOA) principles.
 
 ## Actors
 
