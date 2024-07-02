@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:tns="http://www.furryaide/ws/petRelinquisherService"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  targetNamespace="http://www.furryaide/ws/petRelinquisherService">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide/ws/petRelinquisherService" schemaLocation="../schemas/petRelinquisherOperations.xsd"/>
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="petRelinquisherFault">
+		<wsdl:part name="params" element="tns:petRelinquisherFault"/>
+	</wsdl:message>
+
+	<wsdl:message name="getpetRelinquishersRequestMsg">
+		<wsdl:part name="params" element="tns:getpetRelinquishersRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getpetRelinquishersResponseMsg">
+		<wsdl:part name="params" element="tns:getpetRelinquishersResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="deletepetRelinquisherRequestMsg">
+		<wsdl:part name="params" element="tns:deletepetRelinquisherRequest"/>
+	</wsdl:message>
+	<wsdl:message name="deletepetRelinquisherResponseMsg">
+		<wsdl:part name="params" element="tns:deletepetRelinquisherResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="updatepetRelinquisherRequestMsg">
+		<wsdl:part name="params" element="tns:updatepetRelinquisherRequest"/>
+	</wsdl:message>
+	<wsdl:message name="updatepetRelinquisherResponseMsg">
+		<wsdl:part name="params" element="tns:updatepetRelinquisherResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="petRelinquisherServicePortType">
+		<wsdl:operation name="deletepetRelinquisher">
+			<wsdl:input message="tns:deletepetRelinquisherRequestMsg"/>
+			<wsdl:output message="tns:deletepetRelinquisherResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:petRelinquisherFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="updatepetRelinquisher">
+			<wsdl:input message="tns:updatepetRelinquisherRequestMsg"/>
+			<wsdl:output message="tns:updatepetRelinquisherResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:petRelinquisherFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getpetRelinquishers">
+			<wsdl:input message="tns:getpetRelinquishersRequestMsg"/>
+			<wsdl:output message="tns:getpetRelinquishersResponseMsg"/>
+			<wsdl:fault name="fault" message="tns:petRelinquisherFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="petRelinquisherServiceSOAPBinding" type="tns:petRelinquisherServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="deletepetRelinquisher">
+			<soap:operation soapAction="deletepetRelinquisher"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="updatepetRelinquisher">
+			<soap:operation soapAction="updatepetRelinquisher"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getpetRelinquishers">
+			<soap:operation soapAction="getpetRelinquishers"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="petRelinquisherService">
+		<wsdl:port name="petRelinquisherServicePort" binding="tns:petRelinquisherServiceSOAPBinding">
+			<soap:address location="http://localhost:5000/wsdlfirst/petRelinquisherService"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

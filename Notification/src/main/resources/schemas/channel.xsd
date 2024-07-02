@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.furryaide/ws/channel"
+           elementFormDefault="qualified">
+
+    <xs:complexType name="channel">
+        <xs:sequence>
+            <xs:element name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="email"/>
+                        <xs:enumeration value="sms"/>
+                        <xs:enumeration value="push"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="address" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

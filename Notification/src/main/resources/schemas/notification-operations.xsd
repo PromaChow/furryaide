@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ntf="http://www.furryaide/ws/Notification"
+           xmlns:status="http://www.furryaide/ws/StatusCodeService"
+           targetNamespace="http://www.furryaide/ws/NotificationOperations"
+           elementFormDefault="qualified">
+
+    <xs:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>
+
+    <xs:element name="sendNotificationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="notification" type="ntf:Notification"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="sendNotificationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="statusCode" type="status:statusCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

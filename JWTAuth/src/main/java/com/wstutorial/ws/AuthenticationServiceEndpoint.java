@@ -20,9 +20,9 @@ public class AuthenticationServiceEndpoint {
 		System.out.println(request.getUsername());
 		// Dummy token generation
 		String token = "dummy-token-for-" + request.getUsername();
-
+		response.setToken(token);
 		response.setExpiresIn(3600); // Token expiry time in seconds (1 hour)
-
+		System.out.println(response.getToken());
 		return response;
 	}
 

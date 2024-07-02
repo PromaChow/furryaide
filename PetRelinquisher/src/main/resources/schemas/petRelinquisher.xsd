@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.furryaide/ws/Relinquisher"
+           targetNamespace="http://www.furryaide/ws/Relinquisher"
+           elementFormDefault="qualified">
+
+    <xs:complexType name="PetRelinquisher">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" />
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="email" type="xs:string" />
+            <xs:element name="phone" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PetRelinquishers">
+        <xs:sequence>
+            <xs:element type="tns:PetRelinquisher" minOccurs="0" maxOccurs="unbounded" name="petRelinquishers" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="petRelinquisherFault" type="xs:string" />
+</xs:schema>

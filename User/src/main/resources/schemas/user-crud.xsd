@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.furryaide.com/user-authentication"
+           xmlns="http://www.furryaide.com/user-authentication"
+           xmlns:user="http://www.furryaide.com/authentication"
+           elementFormDefault="qualified">
+
+    <xs:import namespace="http://www.furryaide.com/authentication" schemaLocation="user.xsd"/>
+
+    <xs:element name="CreateUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="user:User"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CreateUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ReadUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ReadUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="user:User" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UpdateUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="user:User"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UpdateUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeleteUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="username" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeleteUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

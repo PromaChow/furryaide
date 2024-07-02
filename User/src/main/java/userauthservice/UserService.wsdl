@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:aut="http://www.furryaide.com/user-authentication"
+				  xmlns:tns="http://www.furryaide.com/user-authentication"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  xmlns:crud="http://www.furryaide.com/user-authentication"
+				  targetNamespace="http://www.furryaide.com/user-authentication">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide.com/user-authentication" schemaLocation="../schemas/user-auth.xsd"/>
+			<xsd:import namespace="http://www.furryaide.com/user-authentication" schemaLocation="../schemas/user-crud.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="authenticateUserRequestMessage">
+		<wsdl:part name="parameters" element="aut:authenticateUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="authenticateUserResponseMessage">
+		<wsdl:part name="parameters" element="aut:authenticateUserResponse"/>
+	</wsdl:message>
+
+
+	<wsdl:message name="validateTokenRequestMessage">
+		<wsdl:part name="parameters" element="aut:validateTokenRequest"/>
+	</wsdl:message>
+	<wsdl:message name="validateTokenResponseMessage">
+		<wsdl:part name="parameters" element="aut:validateTokenResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="CreateUserRequestMessage">
+		<wsdl:part name="parameters" element="crud:CreateUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="CreateUserResponseMessage">
+		<wsdl:part name="parameters" element="crud:CreateUserResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="ReadUserRequestMessage">
+		<wsdl:part name="parameters" element="crud:ReadUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ReadUserResponseMessage">
+		<wsdl:part name="parameters" element="crud:ReadUserResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="UpdateUserRequestMessage">
+		<wsdl:part name="parameters" element="crud:UpdateUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateUserResponseMessage">
+		<wsdl:part name="parameters" element="crud:UpdateUserResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="DeleteUserRequestMessage">
+		<wsdl:part name="parameters" element="crud:DeleteUserRequest"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteUserResponseMessage">
+		<wsdl:part name="parameters" element="crud:DeleteUserResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="UserAuthenticationServicePortType">
+		<wsdl:operation name="authenticateUser">
+			<wsdl:input message="tns:authenticateUserRequestMessage"/>
+			<wsdl:output message="tns:authenticateUserResponseMessage"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="validateToken">
+			<wsdl:input message="tns:validateTokenRequestMessage"/>
+			<wsdl:output message="tns:validateTokenResponseMessage"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="CreateUser">
+			<wsdl:input message="tns:CreateUserRequestMessage"/>
+			<wsdl:output message="tns:CreateUserResponseMessage"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="ReadUser">
+			<wsdl:input message="tns:ReadUserRequestMessage"/>
+			<wsdl:output message="tns:ReadUserResponseMessage"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="UpdateUser">
+			<wsdl:input message="tns:UpdateUserRequestMessage"/>
+			<wsdl:output message="tns:UpdateUserResponseMessage"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="DeleteUser">
+			<wsdl:input message="tns:DeleteUserRequestMessage"/>
+			<wsdl:output message="tns:DeleteUserResponseMessage"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+
+
+	<wsdl:binding name="UserServiceSOAPBinding" type="tns:UserAuthenticationServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="CreateUser">
+			<soap:operation soapAction="CreateUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="ReadUser">
+			<soap:operation soapAction="ReadUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="UpdateUser">
+			<soap:operation soapAction="UpdateUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="DeleteUser">
+			<soap:operation soapAction="DeleteUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="authenticateUser">
+			<soap:operation soapAction="authenticateUser"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="validateToken">
+			<soap:operation soapAction="validateToken"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="UserService">
+		<wsdl:port name="UserAuthenticationServicePort" binding="tns:UserServiceSOAPBinding">
+			<soap:address location="http://localhost:8000/wsdlfirst/userService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

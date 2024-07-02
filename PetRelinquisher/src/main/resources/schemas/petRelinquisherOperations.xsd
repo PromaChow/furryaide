@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.wstutorial.com/ws/petRelinquisherService"
+           xmlns:pet="http://www.furryaide/ws/Relinquisher"
+           xmlns:sts="http://www.furryaide/ws/StatusCodeService"
+           targetNamespace="http://www.wstutorial.com/ws/petRelinquisherService"
+           elementFormDefault="qualified">
+
+
+    <xs:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../../../../../central-schemas/status-code.xsd"/>
+
+    <xs:element name="updatepetRelinquisherRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PetRelinquisher" type="pet:PetRelinquisher"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updatepetRelinquisherResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="statusCode" type="sts:statusCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deletepetRelinquisherRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deletepetRelinquisherResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="statusCode" type="sts:statusCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getpetRelinquishersRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getpetRelinquishersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="petRelinquishers" type="pet:PetRelinquisher" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="petRelinquisherFault" type="xs:string"/>
+
+</xs:schema>
