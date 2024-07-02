@@ -10,7 +10,7 @@
 
 	<wsdl:types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.furryaide/ws/Question" schemaLocation="../schemas/question.xsd"/>
+			<xsd:import namespace="http://www.furryaide/ws/Question" schemaLocation="../../../../../central-schemas/question.xsd"/>
 			<xsd:import namespace="http://www.furryaide/ws/QuestionnaireService" schemaLocation="../schemas/question-operations.xsd"/>
 			<xsd:import namespace="http://www.furryaide/ws/StatusCodeService" schemaLocation="../schemas/status-code.xsd"/>
 		</xsd:schema>
@@ -149,7 +149,7 @@
 
 	<wsdl:service name="QuestionnaireService">
 		<wsdl:port name="QuestionnaireServicePort" binding="tns:questionnaireServiceSOAPBinding">
-			<soap:address location="http://localhost:8080/wsdlfirst/questionnaireService" />
+			<soap:address location="http://localhost:3005/wsdlfirst/questionnaireService" />
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

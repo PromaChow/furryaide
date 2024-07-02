@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.furryaide.com/accesscontrol"
+           xmlns:permission="http://www.furryaide.com/permission"
+           xmlns:q="http://www.furryaide/ws/ManageQuestionnaire"
+
+           xmlns="http://www.furryaide.com/accesscontrol"
+           elementFormDefault="qualified">
+    <xs:import namespace="http://www.furryaide.com/permission" schemaLocation="../../../../../central-schemas/permission.xsd"/>
+    <xs:import namespace="http://www.furryaide.com/permission" schemaLocation="../schemas/manage-question.xsd"/>
+
+    <xs:element name="checkPermissionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="permission" type="permission:permission" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="checkPermissionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="hasPermission" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

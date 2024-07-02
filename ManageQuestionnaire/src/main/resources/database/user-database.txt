@@ -1,0 +1,4 @@
+john.doe:hash-12345:CUSTOMER
+jane.smith:hash-1234:PET_RELINQUISHER
+bob.jones:hash-1234:PET_RELINQUISHER
+

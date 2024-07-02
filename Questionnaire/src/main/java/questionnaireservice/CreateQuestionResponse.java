@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="statusCode" type="{http://www.furryaide/ws/StatusCodeService}statusCode"/>
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,13 +30,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "statusCode"
+    "statusCode",
+    "id"
 })
 @XmlRootElement(name = "createQuestionResponse", namespace = "http://www.furryaide/ws/QuestionnaireService")
 public class CreateQuestionResponse {
 
     @XmlElement(namespace = "http://www.furryaide/ws/QuestionnaireService", required = true)
     protected StatusCode statusCode;
+    @XmlElement(namespace = "http://www.furryaide/ws/QuestionnaireService")
+    protected long id;
 
     /**
      * Gets the value of the statusCode property.
@@ -59,6 +63,22 @@ public class CreateQuestionResponse {
      */
     public void setStatusCode(StatusCode value) {
         this.statusCode = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     */
+    public void setId(long value) {
+        this.id = value;
     }
 
 }

@@ -33,6 +33,8 @@ public class QuestionServiceEndpoint {
 		StatusCode code = factory.createStatusCode();
 		CreateQuestionResponse response = factory.createCreateQuestionResponse();
 		code.setCode(200);
+		response.setId(request.getQuestion().getId());
+
 		response.setStatusCode(code);
 		return response;
 	}

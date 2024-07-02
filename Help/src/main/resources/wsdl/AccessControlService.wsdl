@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:acc="http://www.furryaide.com/accesscontrol"
+				  xmlns:tns="http://www.furryaide.com/accesscontrol"
+				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+				  targetNamespace="http://www.furryaide.com/accesscontrol">
+
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://www.furryaide.com/accesscontrol" schemaLocation="../schemas/access-control.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+
+	<wsdl:message name="checkPermissionRequestMessage">
+		<wsdl:part name="parameters" element="acc:checkPermissionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="checkPermissionResponseMessage">
+		<wsdl:part name="parameters" element="acc:checkPermissionResponse"/>
+	</wsdl:message>
+
+	<wsdl:portType name="AccessControlServicePortType">
+		<wsdl:operation name="checkPermission">
+			<wsdl:input message="tns:checkPermissionRequestMessage"/>
+			<wsdl:output message="tns:checkPermissionResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="AccessControlServiceSOAPBinding" type="tns:AccessControlServicePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		<wsdl:operation name="checkPermission">
+			<soap:operation soapAction="checkPermission"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="AccessControlService">
+		<wsdl:port name="AccessControlServicePort" binding="tns:AccessControlServiceSOAPBinding">
+			<soap:address location="http://localhost:3002/wsdlfirst/accessControlService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
