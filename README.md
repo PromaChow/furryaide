@@ -128,3 +128,25 @@ The table contains justification for how we achieved or omitted each type of cou
 | **Contract-to-Technology Coupling** | Occurs when service contracts are tied to specific technologies, limiting their interoperability.                         | `Omitted` by using technology-neutral contracts, such as standard WSDL and XML schemas, to promote interoperability. We have used SOAP protocol which establishes communication over HTTP.   |
 | **Contract-to-Implementation Coupling** | Happens when service contracts are tied to specific implementations, including data models and APIs.                       | `Omitted` by abstracting implementation details and focusing on service capabilities in the contracts. Each Entity Service also maintains a dedicated database.                  |
 | **Contract-to-Functional Coupling** | This occurs when a service contract is tightly coupled to a specific functionality or process within the enterprise.         | Achieved by designing task services like `RequestAdoption` Service and `ApproveAdoption` Service are intentionally designed with functional coupling to specific business processes, ensuring they fulfill targeted roles effectively.|
+
+### Principle #5: Statelessness
+n the Furryaide application, we have implemented a design strategy known as Internally Deferred State Management to achieve high statelessness. This approach focuses on minimizing the amount of state information that is retained by services between requests, thereby promoting scalability, reliability, and ease of maintenance. Here, we explain the strategy from the perspective of different types of state data: session data, context data, and business data.
+
+### Types of State Data:
+
+#### Session Data:
+- **Definition**: Session data refers to temporary data that pertains to a user's interaction with a service during a session. This can include user preferences, temporary authentication tokens, and other transient information.
+- **Implementation in Furryaide**:
+  - **Token-Based Authentication**: We use JWT (JSON Web Token) for authentication, which allows the user’s state (authentication details) to be encapsulated within the token itself. This eliminates the need for the service to maintain session state between requests. The token contains all necessary information, such as user identity and roles, which the service can decode and use to authenticate requests without maintaining session data.
+
+#### Context Data:
+- **Definition**: Context data includes information about the specific context of a transaction or request, such as request parameters, user location, and temporary settings that are relevant only for the duration of the transaction.
+- **Implementation in Furryaide**:
+  - **Request Parameters**: All context data required to process a request is included in the request itself. Each request carries its own context, ensuring that the service does not need to maintain or manage context data between requests. For example, search parameters for pets in case of `Pet` service are included in the search request payload.
+  - **Stateless Operations**: Services are designed to process each request independently, relying entirely on the data provided within the request and the database. This ensures that context data is not stored or reused between requests.
+
+#### Business Data:
+- **Definition**: Business data consists of core data that is central to the business logic and operations, such as user profiles, pet information, adoption records, and other persistent data.
+- **Implementation in Furryaide**:
+  - **Database Interactions**: Business data is stored in dedicated databases. Services interact with the database to fetch or update business data as needed. This approach ensures that no business data is retained in the service layer between requests. For example, when a user submits an adoption request, the service processes the request by interacting with the database to fetch the relevant pet and user information, and then stores the adoption record in the database.
+  - **Persistent Storage**: By using persistent storage (databases), we ensure that business data is always available and up-to-date without requiring the service to maintain state.
