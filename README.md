@@ -96,7 +96,7 @@ The Manage Questionnaire service comes up with functionalities like `createQuest
 
 
 
-**Point to be noted:** In all our services, we embed the token as an attribute and check if the token is valid and if the user has permission for accessing a particular service. We were inspired by SOAP request authenticated with WS-UsernameToken(https://stackoverflow.com/questions/3448498/example-of-soap-request-authenticated-with-ws-usernametoken). We did not use the wsse protocol but we tried to mimic that. Also referring this paper Dan, Ni, et al. "Attribute based access control (ABAC)-based cross-domain access control in service-oriented architecture (SOA)." 2012 International Conference on Computer Science and Service System. IEEE, 2012. since I was also inspired by some of the principles stated in the paper such as putting ABAC at different levels of the SOA.
+**Point to be noted:** In all our services, we embed the token as an attribute and check if the token is valid and if the user has permission for accessing a particular service. We were inspired by SOAP request authenticated with WS-UsernameToken(https://stackoverflow.com/questions/3448498/example-of-soap-request-authenticated-with-ws-usernametoken). We did not use the wsse protocol but we tried to mimic that. Also referring this paper ```Dan, Ni, et al. "Attribute based access control (ABAC)-based cross-domain access control in service-oriented architecture (SOA)." 2012 International Conference on Computer Science and Service System. IEEE, 2012.``` since we were also inspired by some of the principles stated in the paper such as putting ABAC at different levels of the SOA.
 
 ## SOA Principles
 
