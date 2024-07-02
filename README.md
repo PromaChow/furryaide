@@ -90,6 +90,10 @@ The Pet Service provides CRUD operations for pets.
 
 The Manage Adoption service comes up with functionalities like `requestAdoption`, `cancelAdoption`, '`rejectAdoption`, `getAdoptionStatus`,`getAdoptionDetails`. These operations cannot be accessed by everyone. A permission check is first done to check if a particular user can access a particular operation. For example, `requestAdoption` can only be used by users who have permission `request-adoption`. These service uses `User`, `Pet`, `Notification` and `Permission` service to achieve its functionality. 
 
+### Manage Questionnaire Service
+
+The Manage Questionnaire service comes up with functionalities like `createQuestionnaire`, `updateQuestionnaire`, `submitQuestionnaire`, `approveQuestionnaire`. In the same way as manage adoption service, a permission check is done. For example, `submitQuestionnaire` can only be accessed by the customer, hence users with permission  `submit-questionnaire` can access the operation.
+
 
 
 **Point to be noted:** In all our services, we embed the token as an attribute and check if the token is valid and if the user has permission for accessing a particular service. We were inspired by SOAP request authenticated with WS-UsernameToken(https://stackoverflow.com/questions/3448498/example-of-soap-request-authenticated-with-ws-usernametoken). We did not use the wsse protocol but we tried to mimic that.
@@ -137,12 +141,14 @@ This principle states that "services contain and express agnostic logic and can 
 
 | **Service**               | **Amount of Service Consumers** | **Used In**                                               | **Type of Reusability** |
 | ------------------------- | ------------------------------- | --------------------------------------------------------- | ----------------------- |
-| **User Service**          | 2                               | ApproveAdoption, RequestAdoption                          | Complete                |
-| **JWTAuth Service**       | 2                               | ApproveAdoption, RequestAdoption (via UserAuthentication) | Complete                |
-| **Permissions Service**   | 2                               | ApproveAdoption, RequestAdoption                          | Targeted                |
-| **Questionnaire Service** | 2                               | ApproveAdoption, RequestAdoption                          | Complete                |
-| **Pets Service**          | 1                               | RequestAdoption                                           | Complete                |
-| **Notification Service**  | 0                               | -                                                         | Complete                |
+| **User Service**          | 2                               | ManageAdoption, ManageQuestionnaire                          | Complete                |
+| **JWTAuth Service**       | 2                               | ManageAdoption, ManageQuestionnaire  | Complete                |
+| **Permissions Service**   | 2                               | ManageAdoption, ManageQuestionnaire                          | Targeted                |
+| **Questionnaire Service** | 1                               |  ManageQuestionnaire                          | Complete                |
+| **Pets Service**          | 1                               | ManageAdoption                                           | Complete                |
+| **Notification Service**  | 1                               |  ManageAdoption                                                        | Complete                |
+| **ManageQuestionnaire Service**  | 0                               | -                                                         | Targeted               |
+| **ManageAdoption Service**  | 0                               | -                                                         | Targeted               |
 
 The book stated two types of measures based on the number of service consumers and the frequency at which the consumers have consumed it. However, we are at a preliminary stage of development and have not integrated the services with the user interface to state the frequency yet. So, we have not integrated that measure here.
 
@@ -159,7 +165,7 @@ Service isolation is a key principle in Service-Oriented Architecture (SOA) that
 - **Service Logic Isolation**: The underlying logic is isolated, but data resources are shared with other parts of the enterprise. This level of isolation focuses on the capability of the service logic, ensuring that while the core logic remains isolated, data resources can be accessed and utilized by different services within the enterprise.
 - **Pure Service Isolation**: The underlying logic and data resources are completely isolated and dedicated to the service. This level of isolation ensures that both the logic and data are exclusively used by the service, providing a high degree of independence and minimizing potential dependencies or conflicts with other parts of the enterprise.
 
-We argue that all of our services except for `RequestAdoption` follow Pure Service Isolation. We have carefully curated each service so that the functionality and the underlying logic do not overlap. For example, primarily we have designed PetManagement service having the functionalities of searching, sorting and filtering pets. Then after analysis, we came to a decision that these capabilities should belong to Pet service instead. Moreover, to achieve data isolation, we have maintained separate dedicated dummy databases for services `Pet`, `User`, `Permissions` and `Questionnaire`.
+We argue that all of our services except for `ManageAdoption` follow Pure Service Isolation. We have carefully curated each service so that the functionality and the underlying logic do not overlap. For example, primarily we have designed PetManagement service having the functionalities of searching, sorting and filtering pets. Then after analysis, we came to a decision that these capabilities should belong to Pet service instead. Moreover, to achieve data isolation, we have maintained separate dedicated dummy databases for services `Pet`, `User`, `Permissions` and `Questionnaire`.
 
 ### Principle #5: Loose Coupling
 
@@ -173,7 +179,7 @@ The table contains justification for how we achieved or omitted each type of cou
 | **Contract-to-Logic Coupling**          | This occurs when the service contract imposes specific requirements on the underlying logic.                         | `Omitted`: We kept the service contract independent of the underlying logic and implementation.                                                                                                                                          |
 | **Contract-to-Technology Coupling**     | Occurs when service contracts are tied to specific technologies, limiting their interoperability.                    | `Omitted` by using technology-neutral contracts, such as standard WSDL and XML schemas, to promote interoperability. We have used SOAP protocol which establishes communication over HTTP.                                               |
 | **Contract-to-Implementation Coupling** | Happens when service contracts are tied to specific implementations, including data models and APIs.                 | `Omitted` by abstracting implementation details and focusing on service capabilities in the contracts. Each Entity Service also maintains a dedicated database.                                                                          |
-| **Contract-to-Functional Coupling**     | This occurs when a service contract is tightly coupled to a specific functionality or process within the enterprise. | `Achieved` by designing task services like `RequestAdoption` Service and `ApproveAdoption` Service are intentionally designed with functional coupling to specific business processes, ensuring they fulfill targeted roles effectively. |
+| **Contract-to-Functional Coupling**     | This occurs when a service contract is tightly coupled to a specific functionality or process within the enterprise. | `Achieved` by designing task services like `ManageAdoption` Service and `ManageQuestionnaire` Service are intentionally designed with functional coupling to specific business processes, ensuring they fulfill targeted roles effectively. |
 
 ### Principle #6: Statelessness
 
@@ -203,16 +209,16 @@ In the Furryaide application, we have implemented a design strategy known as Int
 
 ### Principle #7: Composability of Services
 
-In the Furryaide application, the services are composable. For instance, the `requestAdoption` service allows customers to browse pets, select a pet for adoption, and submit the necessary questionnaires. This service utilizes shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the customer,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service, `getAllPets` provided by the `Pet`, `getQuestion` from the `Questionnaire` service.
+In the Furryaide application, the services are composable. For instance, the `manageAdoption` service allows customers to request for adoption, cancel an adoption, and getting notifications whenever their adoption request is approved or rejected. Similarly, for pet relinquisher, this service offers functionalities like rejecting an adoption. This service utilizes shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the user,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access the specific operations exposed by the service, `updatePet` provided by the `Pet`, `sendNotification` from the `Notification` service.
 
-On the other hand, the `approveAdoption` service enables pet relinquishers to review submitted questionnaires, approve adoption requests, and manage the adoption process. This service also leverages shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the pet relinquisher,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service.
+On the other hand, the `manageQuestionnaire` service enables pet relinquishers to create questionnaires, review submitted questionnaires and approve or reject questionnaires. The customers are also able to submit the questionnaire using this service. This service also leverages shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the user,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service and `Question` service to make Questionnaire.
 
 **Some things to be noted-**
 
 - We promised to develop an adoption service where the Customer will be able to login and request adoption and the Relinquisher will be able to approve the requests.
-- We did not promise profile management or notification services to be integrated. Hence, we did not explicitly handle those in our scenerio for now. Even though, we have developed Notification Utility service, we did not develop a task service to integrate it with any Entity Service.
+- We did not promise profile management or notification services to be integrated. Hence, we did not explicitly handle those in our scenerio for now. 
 - We believe the developed services fulfill the basic requirements or functionalities to get a Pet Adoption application up and running. Hence, we do think we have developed the functionalities we have promised.
-- We have additionally developed Customer and PetRelinquisher services in somewhat incomplete way. We did not mention in our scenerio before. The reason is we developed it keeping User Profile Management in mind. But since we have not promised it, we did not intergate the services. Moreover, since our entire system is role based we do not think extra services specifying roles like Customer and PetRelinquisher is necessary for our scenerio.
+- We have additionally developed Customer and PetRelinquisher services in somewhat incomplete way. We did not mention in our scenerio before. The reason is we developed it keeping User Profile Management in mind. But since we have not promised it, we did not intergate the services. Moreover, since our entire system is permission based we do not think extra services specifying roles like Customer and PetRelinquisher is necessary for our scenerio.
 
 From the marking perspective, 50% was allocated if we could show we can run a service successfully. So, for that, we are going to add screenshots of the `User` service because we have developed it the very first.
 
