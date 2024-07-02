@@ -86,13 +86,11 @@ The Pet Service provides CRUD operations for pets.
 
 ## Task Services
 
-### Request Adoption Service
+### Manage Adoption Service
 
-The Request Adoption service can only be accessed by users having the permission request-adoption. This service includes capabilities such as listing all pets and submitting a questionnaire for a pet.
+The Manage Adoption service comes up with functionalities like `requestAdoption`, `cancelAdoption`, '`rejectAdoption`, `getAdoptionStatus`,`getAdoptionDetails`. These operations cannot be accessed by everyone. A permission check is first done to check if a particular user can access a particular operation. For example, `requestAdoption` can only be used by users who have permission `request-adoption`. These service uses `User`, `Pet`, `Notification` and `Permission` service to achieve its functionality. 
 
-### Approve Adoption Service
 
-The Approve Adoption service can only be accessed by users having the permission approve-adoption. This service includes capabilities such as listing all questionnaires and approving a questionnaire submission request for a pet.
 
 **Point to be noted:** In all our services, we embed the token as an attribute and check if the token is valid and if the user has permission for accessing a particular service. We were inspired by SOAP request authenticated with WS-UsernameToken(https://stackoverflow.com/questions/3448498/example-of-soap-request-authenticated-with-ws-usernametoken). We did not use the wsse protocol but we tried to mimic that.
 
