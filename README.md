@@ -4,6 +4,32 @@
 
 Furryaide is a SOAP-based application designed to facilitate the process of pet adoption. It enables users to list pets for adoption, apply for adoption, and manage pet adoption-related operations. The architecture follows Service-Oriented Architecture (SOA) principles.
 
+# Installation Instructions for Furryaide Application
+
+## Prerequisites
+Ensure that Java 8 is installed on your system.
+
+## Clone the Repository
+```
+git clone git@github.com:PromaChow/furryaide.git
+cd furryaide
+```
+## Run the Project from IntelliJ
+- Load Each Folder into IntelliJ
+- Open IntelliJ IDEA.
+- Load each folder (e.g., User, Permissions, Pets) as distinct projects:
+- Click on File > Open.
+- Select the folder and click OK.
+- For each project, edit the configurations if necessary and run the application.
+
+## Run the Project from Command Prompt
+Run 
+```
+cd <project_path>
+mvn spring-boot:run
+```
+from the command prompt to run individual projects
+
 ## Actors
 
 There are two main actors in the system:
@@ -158,5 +184,29 @@ In the Furryaide application, we have implemented a design strategy known as Int
 In the Furryaide application, the services are composable. For instance, the `requestAdoption` service allows customers to browse pets, select a pet for adoption, and submit the necessary questionnaires. This service utilizes shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the customer,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service, `getAllPets` provided by the `Pet`, `getQuestion` from the  `Questionnaire` service.
 
 On the other hand, the `approveAdoption` service enables pet relinquishers to review submitted questionnaires, approve adoption requests, and manage the adoption process. This service also leverages shared functionalities such as `validateToken` provided by `JWTAuth` to verify the identity of the pet relinquisher,`checkPermission` provided by `Permissions` service to ensure they have the necessary permissions to access this service. 
+
+From the marking perspective, 50% was allocated if we could show we can run a service successfully. So, for that, we are going to add screenshots of the `User` service because we have developed it the very first.
+# Service Execution Proof
+## User Service
+We present the following screenshots for the `User` service:
+
+### AuthenticateUser Endpoint
+<img width="1496" alt="Screenshot 2024-07-02 at 1 20 43 PM" src="https://github.com/PromaChow/wildflower/assets/48786787/dc33278d-b420-49a5-aad3-646177a61486">
+
+### ValidateToken Endpoint
+<img width="1453" alt="User Service Start" src="https://github.com/PromaChow/wildflower/assets/48786787/2a593df8-d389-4b63-adbb-889e8b8e83f7">
+
+### CreateUser Endpoint
+<img width="1473" alt="User Service Endpoint" src="https://github.com/PromaChow/wildflower/assets/48786787/fec967ba-42b7-41a1-9fa8-db46ecb16be4">
+
+### UpdateUser Endpoint
+<img width="1487" alt="User Service Response" src="https://github.com/PromaChow/wildflower/assets/48786787/4e65087a-373a-4e2a-8a84-24e919cbc867">
+
+### ReadUser Screenshots
+<img width="1501" alt="Additional Screenshot 1" src="https://github.com/PromaChow/wildflower/assets/48786787/be42581f-ce0a-4c14-8638-dba4e7459709">
+
+### DeleteUser Screenshots
+<img width="1491" alt="Additional Screenshot 2" src="https://github.com/PromaChow/wildflower/assets/48786787/e072b996-1fb0-4626-88f4-9f2cc6bfbc77">
+
 
 
